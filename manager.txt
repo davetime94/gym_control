@@ -1,0 +1,632 @@
+<?php
+
+include("conn.php");
+include("components/security.php");
+
+//TOTAL DE MIEMBROS
+$members=$conn->query("SELECT count(*) as total FROM members");
+$members->execute();
+$resultado_members=$members->fetch(PDO::FETCH_ASSOC);
+
+
+//TOTAL DE GYMS
+$stmt_gyms=$conn->query("SELECT count(*) as total FROM users_admin");
+$stmt_gyms->execute();
+$result_gyms=$stmt_gyms->fetch(PDO::FETCH_ASSOC);
+
+//De plan Free 
+$stmt_free=$conn->query("SELECT COUNT(*) as total FROM gyms where plan_saas = 'Free'");
+$stmt_free->execute();
+$result_free = $stmt_free ->fetch(PDO::FETCH_ASSOC);
+
+//De plan Enterprise  
+$stmt_enterprise=$conn->query("SELECT COUNT(*) as total FROM gyms where plan_saas = 'Free'");
+$stmt_enterprise->execute();
+$result_enterprise = $stmt_enterprise ->fetch(PDO::FETCH_ASSOC);
+
+
+//TOTAL DE user admin
+$stmt_users_admin=$conn->query("SELECT count(*) as total FROM users_admin");
+$stmt_users_admin->execute();
+$result_stmt_users_admin=$stmt_users_admin->fetch(PDO::FETCH_ASSOC);
+
+//SQL DE GYMS 
+$stmt_gyms_full=$conn->query("SELECT * from gyms");
+$stmt_gyms_full->execute();
+$result_gym=$stmt_gyms_full->fetchAll(PDO::FETCH_ASSOC);
+
+//AUDITORIAS DE GYMS (NÚMERO O TOTAL) DE LOS QUE LE FALTAN ALGÚN DATO 
+$stmt_autidar=$conn->query("SELECT * 
+FROM gyms
+WHERE
+    rfc_o_tax_id IS NULL OR rfc_o_tax_id = ''
+    OR tax_status IS NULL OR tax_status = ''
+    OR domicilio_completo IS NULL OR domicilio_completo = ''
+    OR telefono_contacto IS NULL OR telefono_contacto = ''
+    OR email_corporativo IS NULL OR email_corporativo = ''
+    OR prueba_existencia IS NULL OR prueba_existencia = '';");
+
+$stmt_autidar->execute();
+$resultado_auditar=$stmt_autidar->fetchAll(PDO::FETCH_ASSOC);
+
+$label="";
+$resultado_g="";
+
+//CONFIGUARACIONES DE LOS FROMS 
+if(isset($_POST['detallador'])){
+
+    $g = $_POST['gym_buscar'];
+    $label=$g;
+
+    $stmt_g=$conn->prepare("SELECT * FROM gyms where id = ?");
+    $stmt_g->execute([$g]);
+    $resultado_g=$stmt_g->fetch(PDO::FETCH_ASSOC);
+
+    $stmt_m=$conn->prepare("SELECT count(*) as total from members where gym_id = ? LIMIT 50 ");
+    $stmt_m->execute([$g]);
+    $resultado_m=$stmt_m->fetch(PDO::FETCH_ASSOC);
+
+    $stmt_l=$conn->prepare("SELECT * from users_admin where gym_id = ? ");
+    $stmt_l->execute([$g]);
+    $resultado_l=$stmt_l->fetch(PDO::FETCH_ASSOC);
+    
+}
+
+//Cambiar datos del form 
+if(isset($_POST['actualizar_gym'])){
+
+    $gym_id = $_POST['gym_id'];
+
+    $nombre_gym = $_POST['nombre_gym'];
+    $rfc_o_tax_id = $_POST['rfc_o_tax_id'];
+    $plan_saas = $_POST['plan_saas'];
+    $prueba_existencia = $_POST['prueba_existencia'];
+    $tax_status = $_POST['tax_status'];
+    $domicilio_completo = $_POST['domicilio_completo'];
+    $telefono_contacto = $_POST['telefono_contacto'];
+    $email_corporativo = $_POST['email_corporativo'];
+    $representante_legal = $_POST['representante_legal'];
+    $ultima_auditoria = $_POST['ultima_auditoria'];
+    $notas_regulacion = $_POST['notas_regulacion'];
+
+    $stmt = $conn->prepare("
+        UPDATE gyms
+        SET
+            nombre_gym = ?,
+            rfc_o_tax_id = ?,
+            plan_saas = ?,
+            prueba_existencia = ?,
+            tax_status = ?,
+            domicilio_completo = ?,
+            telefono_contacto = ?,
+            email_corporativo = ?,
+            representante_legal = ?,
+            ultima_auditoria = ?,
+            notas_regulacion = ?
+        WHERE id = ?
+    ");
+
+    $stmt->execute([
+        $nombre_gym,
+        $rfc_o_tax_id,
+        $plan_saas,
+        $prueba_existencia,
+        $tax_status,
+        $domicilio_completo,
+        $telefono_contacto,
+        $email_corporativo,
+        $representante_legal,
+        $ultima_auditoria,
+        $notas_regulacion,
+        $gym_id
+    ]);
+
+
+    echo "<h4 class='badge-owner' style='padding:10px;' >Gym actualizado correctamente.</h4>";
+
+}
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<style>
+
+    .form_grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 10px;
+    }
+    form .card{
+        margin: 4px;
+    }
+    a{text-decoration: none;color:white; }
+        :root {
+        --primary: #4361ee;
+        --bg-main: #f4f7fe;
+        --white: #ffffff;
+        --text-main: #2b3674;
+        --text-muted: #a3aed0;
+    }
+
+
+
+    body {
+        background: var(--bg-main);
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        color: var(--text-main);
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        min-height: 100vh;
+    }
+
+    .settings-container {
+        padding: 40px;
+    }
+
+    .page-header {
+        margin-bottom: 30px;
+    }
+
+    .page-header h1 {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin: 0;
+    }
+
+    /* Grid principal para ocupar toda la pantalla */
+    .settings-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Dos columnas principales */
+        gap: 30px;
+    }
+
+    .card {
+        background: var(--white);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.1);
+        border: 1px solid rgba(224, 229, 242, 0.5);
+    }
+
+    .card-full {
+        grid-column: span 2;
+    }
+
+    .card h2 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 25px;
+        color: var(--text-main);
+    }
+
+    /* Formularios */
+  
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-main);
+
+    }
+
+    input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 12px;
+        border: 1px solid #e0e5f2;
+        background: #f4f7fe;
+        font-size: 0.9rem;
+        outline: none;
+        transition: 0.3s;
+        box-sizing: border-box;
+    }
+
+    input:focus {
+        border-color: var(--primary);
+        background: white;
+    }
+
+    input[readonly] {
+        background: #f1f5f9;
+        cursor: not-allowed;
+    }
+
+    .btn-save {
+        background: var(--primary);
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 12px;
+        width: 100%;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+
+    .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 10px 20px rgba(67, 97, 238, 0.3);
+    }
+
+    /* Estilo de la info lateral */
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #f4f7fe;
+    }
+
+    .info-item span:first-child {
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+
+    .info-item span:last-child {
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .badge-plan {
+        background: #eef2ff;
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 8px;
+        font-size: 0.75rem;
+        font-weight: 800;
+    }
+
+    /* Alertas */
+    .alert-box {
+        grid-column: span 2;
+        padding: 15px 20px;
+        border-radius: 15px;
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .success-alert { background: #e6fff9; color: #05cd99; border: 1px solid #05cd9930; }
+    .error-alert { background: #fff5f5; color: #ee5d50; border: 1px solid #ee5d5030; }
+</style>
+<body>
+
+<?php include("components/navbar.php"); ?>
+
+<main>
+    <section style="height: 100vh">
+        <?php include("components/sidebar.php"); ?>
+    </section>
+
+
+    <?php if($_SESSION['rol']!='Owner'): ?>
+        <div class="card" style="display: flex; flex-direction: column;" >
+            <h2>A donde papi?</h2>
+            <p>Porfavorts, regresa al menu apropiado</p>
+            <button class="btn-search" > <a href="clientes.php">Regresar</a></button><br><br>
+            <img  style="width: 50vh; height: 50vh; border-radius:4px;" src="recursos/meme.png" alt="">
+        </div>
+    <?php elseif($_SESSION['rol']=='Owner'): ?>
+
+    <section>
+
+
+<!-- AUDITORIAS -->
+    <div style="display: flex; flex-direction: row; gap:15px; padding:10px">
+        <div class="card fit" style="flex-direction: column; width: fit-content;  ">
+            <h2>Usuarios totales</h2>
+            <?php echo "Miembros en total: " . $resultado_members['total']; ?><br>
+            <?php echo "Manager y recepcionista: " .  $result_stmt_users_admin['total']; ?><br>
+            <?php echo "Gyms totales: " .  $result_gyms['total']; ?><br>
+        </div>
+
+        <div class="card fit" style="flex-direction: column; width: fit-content;  ">
+            <h2>Tipos de licencia</h2>
+            <?php echo "Free: " . $result_free['total']; ?><br>
+            <?php echo "Enterprise: " . $result_enterprise['total']; ?><br>
+        </div>
+
+        <div class="card fit" style="flex-direction: column; width: fit-content;  ">
+            <h2>Alertas</h2>
+            <small>Cuentas con datos faltantes</small><br>
+            <?php foreach($resultado_auditar as $row){ echo "<p>{$row['id']}</p>";}  ?>
+        </div>
+
+        <!-- FORM PARA BUSCAR -->
+            <div class="card" style=" max-height: 500px; overflow: auto;" >
+            <h2>Ver detalles de gym</h2>
+            <small><?php echo "ID del gym trabajado: " . $label; ?></small>
+            <form method="post">
+                <select name="gym_buscar">
+                    <?php foreach ($result_gym as $row){
+                        echo " <option value='{$row['id']}'>{$row['id']} - {$row['nombre_gym']}</option>";}?>
+                </select>
+                <button class="btn-search" type="submit" name="detallador">Buscar</button>
+            </form>
+            </div><!-- TERMINA FORM PARA BUSCAR -->
+
+    </div>
+
+
+
+<!-- MOSTRA INFORMACION DEL FORM -->
+
+<?php if($resultado_g): ?>
+<div class="cards">
+    
+
+    <div class="form_grid">
+        <!-- FORM DE LOS GYM -->
+        <form method="post" style="display: flex; flex-direction: row;  " >
+
+            <div class="card" style="flex-direction: column;" >
+                <div >
+                    <label>ID</label>
+                    <input type="text" style="width: fit-content;" disabled value="<?php echo $resultado_g['id']; ?>">
+                </div><br>
+
+                <div>
+                    <label>Nombre Gym</label>
+                    <input type="text" style="width: fit-content;" name="nombre_gym" value="<?php echo $resultado_g['nombre_gym']; ?>">
+                </div><br>
+
+                <div>
+                    <label>RFC / Tax ID</label>
+                    <input type="text" style="width: fit-content;" name="rfc_o_tax_id" value="<?php echo $resultado_g['rfc_o_tax_id']; ?>">
+                </div><br>
+
+                <div>
+                    <label>Plan SaaS</label>
+                  <select name="plan_saas" class="form-group">
+                        <option value="Free" <?php if($resultado_g['plan_saas']=='Free') echo 'selected'; ?>>Free</option>
+                        <option value="Enterprise" <?php if($resultado_g['plan_saas']=='Enterprise') echo 'selected'; ?>>Enterprise</option>
+                    </select>
+                </div>
+
+         
+                
+            </div><!-- AQUÍ VA UN CARD SEPARADOR -->
+
+
+            <div class="card" style="flex-direction: column;">
+
+
+                <div>
+                    <label>Prueba Existencia</label>
+                    <input type="text" style="width: fit-content;" name="prueba_existencia" value="<?php echo $resultado_g['prueba_existencia']; ?>">
+                </div>
+
+                <div>
+                    <label>Tax Status</label><br>
+                    <input type="text" style="width: fit-content;" name="tax_status" value="<?php echo $resultado_g['tax_status']; ?>">
+                </div>
+
+
+
+
+                <div>
+                    <label>Domicilio Completo</label>
+                    <input type="text" style="width: fit-content;" name="domicilio_completo" value="<?php echo $resultado_g['domicilio_completo']; ?>">
+                </div>
+
+                <div>
+                    <label>Teléfono Contacto</label>
+                    <input type="text" style="width: fit-content;" name="telefono_contacto" value="<?php echo $resultado_g['telefono_contacto']; ?>">
+                </div>
+
+                <div>
+                    <label>Email Corporativo</label>
+                    <input type="text" style="width: fit-content;" name="email_corporativo" value="<?php echo $resultado_g['email_corporativo']; ?>">
+                </div>
+            </div>
+
+            <div class="card" style="flex-direction: column;">
+                <div>
+                    <label>Representante Legal</label>
+                    <input type="text" style="width: fit-content;" name="representante_legal" value="<?php echo $resultado_g['representante_legal']; ?>">
+                </div>
+
+                <div>
+                    <label>Última Auditoría</label><br>
+                    <input type="date" style="width: fit-content;" name="ultima_auditoria" value="<?php echo $resultado_g['ultima_auditoria']; ?>">
+                </div>
+
+                <div>
+                    <label>Notas Regulación</label>
+                    <input type="text" style="width: fit-content;" name="notas_regulacion" value="<?php echo $resultado_g['notas_regulacion']; ?>">
+                </div>
+
+                <div>
+                    <label>Creado</label><br>
+                    <input type="text" style="width: fit-content;" name="created_at" value="<?php echo $resultado_g['created_at']; ?>">
+                </div>
+
+                <div >
+                    <label>Status: <br><?php echo $resultado_g['status']; ?> </label>
+                    
+                    <p></p>
+                    <select name="status" >
+                        <option value="Active">Active</option>
+                        <option value="Suspended">Suspended</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+
+
+                <input type="hidden" name="gym_id" value="<?php echo $resultado_g['id']; ?>">
+
+                <button class="btn-search" type="submit" name="actualizar_gym" >Enviar</button>
+            </div><!-- Aquí termina el card separador 2 -->
+
+
+        </form>
+
+        <!-- FORM DE LOS USERS_ADMIN -->
+
+
+        <form method="post" style="display: flex; flex-direction: row;  ">
+
+
+            <div class="card" style="flex-direction: column;">
+
+                <input type="hidden" name="user_id" value="<?php echo $resultado_l['id']; ?>">
+
+
+                <div>
+                    <label>Nombre</label>
+                    <input name="nombre" value="<?php echo $resultado_l['nombre']; ?>" placeholder="<?php echo $resultado_l['nombre']; ?>" class="form-group">
+                </div>
+
+                <div>
+                    <label>Email</label>
+                    <input name="email"   value="<?php echo $resultado_l['email']; ?>"  placeholder="<?php echo $resultado_l['email']; ?>"  class="form-group">
+                </div>
+
+                <div>
+                    <label>Rol</label>
+                    <select name="rol" class="form-group">
+                        <option value="Owner" <?php if($resultado_l['rol']=='Owner') echo 'selected'; ?>>Owner</option>
+                        <option value="Manager" <?php if($resultado_l['rol']=='Manager') echo 'selected'; ?>>Manager</option>
+                        <option value="Receptionist" <?php if($resultado_l['rol']=='Receptionist') echo 'selected'; ?>>Receptionist</option>
+                    </select>
+                </div>
+
+
+                <div>
+                    <label>Status</label>
+                    <input name="status" value="<?php echo $resultado_l['status']; ?>" placeholder="<?php echo $resultado_l['status']; ?>" class="form-group">
+                </div>
+            </div>
+            <div class="card" style="flex-direction: column;">
+
+                <div>
+                    <label>Approved</label>
+                    <select name="approved" class="form-group">
+                        <option value="Pendiente" <?php if($resultado_l['approved']=='Pendiente') echo 'selected'; ?>>Pendiente</option>
+                        <option value="Aprobado" <?php if($resultado_l['approved']=='Aprobado') echo 'selected'; ?>>Aprobado</option>
+                        <option value="Expirado" <?php if($resultado_l['approved']=='Expirado') echo 'selected'; ?>>Expirado</option>
+                        <option value="Cancelado" <?php if($resultado_l['approved']=='Cancelado') echo 'selected'; ?>>Cancelado</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Fecha Vencimiento</label>
+                    <input type="date" name="fecha_vencimiento" value="<?php echo $resultado_l['fecha_vencimiento']; ?>" class="form-group">
+                </div>
+
+                <div>
+                    <label>Creado</label>
+                    <input value="<?php echo $resultado_l['created_at']; ?>" class="form-group" disabled>
+                </div>
+            
+
+            
+
+                <div>
+                    <label>Última Actualización</label>
+                    <input value="<?php echo $resultado_l['updated_at']; ?>" class="form-group" disabled>
+                </div>
+
+                <button type="submit" name="actualizar_owner" class="btn-search">Actualizar</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="card" style="flex-direction: column; height:300px; overflow: auto; margin: 10px; padding: 10px;  " >
+    <?php $stmt=$conn->prepare("SELECT * FROM logs where gym_id = ? limit 50");
+        $stmt->execute([$g]);
+        $resultado_logs=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    ?>
+        <h2>Logs</h2>
+        <ul>
+            <?php foreach($resultado_logs as $row){
+                echo "<li>{$row['descripcion']}</li></br>";
+            } ?>
+    
+        </ul>
+    </div>
+
+</div>
+
+
+<?php elseif($resultado_g == ''): ?>
+
+    
+
+<?php endif; ?>
+            <!-- TABLA DE LOS GYMS -->
+            <div class="card" style="margin: 10px; max-height: 500px; overflow: auto;"   >
+                <h2>Gyms</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre Gym</th>
+                            <th>RFC / Tax ID</th>
+                            <th>Plan SaaS</th>
+                            <th>Good Standing</th>
+                            <th>Bajo Revisión</th>
+                            <th>Prueba Existencia</th>
+                            <th>Tax Status</th>
+                            <th>Domicilio Completo</th>
+                            <th>Teléfono Contacto</th>
+                            <th>Email Corporativo</th>
+                            <th>Representante Legal</th>
+                            <th>Última Auditoría</th>
+                            <th>Notas Regulación</th>
+                            <th>Fecha Creación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($result_gym as $row) { ?>
+                        <tr>
+                            <td><?= $row['id']; ?></td>
+                            <td><?= htmlspecialchars($row['nombre_gym']); ?></td>
+                            <td><?= htmlspecialchars($row['rfc_o_tax_id']); ?></td>
+                            <td><?= htmlspecialchars($row['plan_saas']); ?></td>
+                            <td><?= htmlspecialchars($row['prueba_existencia']); ?></td>
+                            <td><?= htmlspecialchars($row['tax_status']); ?></td>
+                            <td><?= htmlspecialchars($row['domicilio_completo']); ?></td>
+                            <td><?= htmlspecialchars($row['telefono_contacto']); ?></td>
+                            <td><?= htmlspecialchars($row['email_corporativo']); ?></td>
+                            <td><?= htmlspecialchars($row['representante_legal']); ?></td>
+                            <td><?= htmlspecialchars($row['ultima_auditoria']); ?></td>
+                            <td><?= htmlspecialchars($row['notas_regulacion']); ?></td>
+                            <td><?= htmlspecialchars($row['created_at']); ?></td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+
+    </section>
+    <?php endif;  ?>
+</main>
+
+    
+</body>
+</html>

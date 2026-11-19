@@ -1,0 +1,6 @@
+        .panel-card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); margin-bottom: 30px; overflow-x: auto; }
+        .panel-card h3 { color: #2b3674; margin-top: 0; margin-bottom: 20px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        table.master-table { width: 100%; border-collapse: collapse; }
+        table.master-table th { text-align: left; padding: 15px 10px; color: #a3aed0; font-size: 0.75rem; text-transform: uppercase; border-bottom: 2px solid #f4f7fe; }
+        table.master-table td { padding: 15px 10px; border-bottom: 1px solid #f4f7fe; font-size: 0.9rem; color: #2b3674; font-weight: 500; }
+        table.master-table tr:hover td { background: #f8fafc; }

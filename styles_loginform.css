@@ -1,0 +1,176 @@
+    :root {
+        --primary: #4361ee;
+        --primary-hover: #3752db;
+        --white: #ffffff;
+        --text-muted: #a3aed0;
+        --bg-gradient: linear-gradient(135deg, #0b1437 0%, #111c44 100%);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        width: 100%;
+        background: var(--bg-gradient);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    /* Fondo decorativo con la imagen que tenías */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: url('recursos/pexels-fire-flintq8-1049543416-20418606.jpg');
+        background-position: center;
+        background-size: cover;
+        opacity: 0.2; /* Toque sutil para que no mate el contraste */
+        z-index: -1;
+    }
+
+    section {
+        width: 100%;
+        max-width: 1200px;
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .form-container {
+        background: rgba(255, 255, 255, 0.03); /* Transparencia ultra fina */
+        backdrop-filter: blur(25px) saturate(180%);
+        -webkit-backdrop-filter: blur(25px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        max-width: 420px;
+        padding: 50px 40px;
+        border-radius: 30px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-text {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 10px;
+        letter-spacing: -1px;
+    }
+
+    .logo-text span {
+        color: var(--primary);
+    }
+
+    h3 {
+        color: var(--white);
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    p.subtitle {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .input-group {
+        text-align: left;
+    }
+
+    label {
+        font-size: 0.8rem;
+        color: var(--white);
+        font-weight: 600;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    input {
+        width: 100%;
+        padding: 15px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--white);
+        font-size: 0.95rem;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 15px rgba(67, 97, 238, 0.2);
+    }
+
+    button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 16px;
+        border-radius: 15px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background: var(--primary-hover);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+    }
+
+    .footer-links {
+        margin-top: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    a:hover {
+        color: var(--white);
+    }
+
+    .btn-ingresar {
+        margin-top: 20px;
+        display: inline-block;
+        padding: 8px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }

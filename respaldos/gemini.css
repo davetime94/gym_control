@@ -1,0 +1,227 @@
+*{
+    margin: 0;
+    box-sizing: border-box; /* Añadido para que los paddings no rompan el tamaño */
+}
+
+:root{
+    /* Nuevas tonalidades Premium (Inspiradas en la imagen blanca/azul) */
+    --greyBackground: #1e1e1e; /* Fondo de cards más suave */
+    --black: #0f0f0f; 
+    
+    --sideBarLigth: #f4f7fe;
+    --sideBardBlack: #111c44; /* Azul oscuro profundo para el sidebar */
+    --shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+
+    /* Colores de Acento (Azul Eléctrico) */
+    --hover: #4361ee;
+    --hoverLight: #4361ee;
+    --span: #4361ee;
+
+    --shadowHover: 0px 5px 15px rgba(67, 97, 238, 0.4);
+    --shadowStrong: 0px 20px 40px rgba(0, 0, 0, 0.4);
+    
+    --radius: 15px; /* Variable para esquinas redondeadas consistentes */
+}
+
+span{
+    color: var(--span);
+    font-weight: 600;
+}
+
+.selected{
+    background-color: var(--hover) !important;
+    color: white !important;
+}
+
+body{
+    font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+    height: 100vh;
+    background-color: var(--black);
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: var(--sideBardBlack);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+nav a{
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+.sidebar{
+    padding: 20px 15px;
+    background-color: var(--sideBardBlack);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar a{
+    text-decoration: none;
+    color: #a3aed0; /* Gris azulado para items no seleccionados */
+    padding: 12px 15px;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    transition: all .3s ease;
+}
+
+.sidebar a:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateX(5px);
+}
+
+main{
+    display: grid;
+    grid-template-columns: 200px 1fr; /* Ancho fijo para sidebar más estético */
+    height: 100vh;
+    gap: 0; /* Quitamos gap para que el sidebar pegue bien */
+}
+
+.content_information{
+    margin: 20px;
+    border-radius: var(--radius);
+    padding: 20px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-buscar{
+    height: 40px;
+    background-color: var(--hoverLight);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 0 20px;
+    transition: .3s;
+}
+
+.btn-buscar:hover{
+    transform: translateY(-2px);
+    box-shadow: var(--shadowHover);
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Para que no se desborden */
+    gap: 20px;
+}
+
+.card{
+    background-color: var(--greyBackground);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.imagen_adorno{
+    border-radius: var(--radius);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+    box-shadow: var(--shadowStrong);
+    margin-bottom: 25px;
+}
+
+#formMiembro input, input{
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    background-color: #2b2b2b;
+    color: white;
+    outline: none;
+    transition: .3s;
+}
+
+input:focus{
+    border-color: var(--hover);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+button{
+    background-color: var(--hover);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover{
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+.menu_actions, .menu_actions1{
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 25px;
+    width: 350px;
+    background-color: var(--sideBardBlack);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    z-index: 1000;
+    transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.perfil_foto{
+    height: 220px;
+    border-radius: var(--radius);
+    object-fit: cover;
+    box-shadow: var(--shadowStrong);
+    margin-bottom: 15px;
+}
+
+.content{
+    padding: 40px;
+    background-color: var(--black);
+}
+
+/* Tablas con diseño limpio */
+td{
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+}
+
+.activo{
+    background-color: #05cd99; /* Verde esmeralda premium */
+    color: white;
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Adaptación para esquema de luz (Inspirado en la imagen de Harriet Nunez) */
+@media (prefers-color-scheme: light){
+    :root {
+        --black: #f4f7fe;
+        --greyBackground: #ffffff;
+        --sideBardBlack: #ffffff;
+    }
+    body { color: #2b3674; }
+    .sidebar { border-right: 1px solid #e0e5f2; }
+    .sidebar a { color: #a3aed0; }
+    .sidebar a:hover, .selected { background-color: var(--hover) !important; color: white !important; }
+    input { background-color: #f4f7fe !important; border: 1px solid #e0e5f2 !important; color: #2b3674 !important; }
+    .card { border: none; }
+    .menu_actions { background-color: white; }
+}

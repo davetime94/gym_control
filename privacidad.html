@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso de Privacidad | Gym Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-hover: #3752db;
+            --white: #ffffff;
+            --text-muted: #a3aed0;
+            --bg-gradient: linear-gradient(135deg, #0b1437 0%, #111c44 100%);
+            --dark: #111c44;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            /* Scrollbar Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+        }
+
+        /* Scrollbar Chrome, Edge, Safari */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-hover); }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            background: var(--bg-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Permite que el contenedor crezca hacia abajo */
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed; /* Fixed para que el fondo no se mueva al hacer scroll */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('recursos/pexels-fire-flintq8-1049543416-20418606.jpg');
+            background-position: center;
+            background-size: cover;
+            opacity: 0.15; 
+            z-index: -1;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 800px; /* Más ancho para que la lectura sea cómoda */
+            padding: 50px 50px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-text { font-size: 1.8rem; font-weight: 800; color: var(--white); margin-bottom: 10px; letter-spacing: -1px; }
+        .logo-text span { color: var(--primary); }
+        
+        h3 { color: var(--white); font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+        p.subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px; }
+
+        .terms-content {
+            text-align: left;
+            background: rgba(0, 0, 0, 0.2); /* Fondo sutil para contrastar el texto */
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .terms-content h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        .terms-content h4:first-child { margin-top: 0; }
+
+        .terms-content p, .terms-content li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .terms-content ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .btn-login {
+            display: inline-block;
+            width: 100%;
+            max-width: 300px;
+            padding: 16px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-login:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0px 10px 20px rgba(67, 97, 238, 0.3);
+            filter: brightness(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .form-container { padding: 30px 20px; }
+            .terms-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        
+        <!-- Header -->
+        <div class="logo-text">Gym<span>Control</span></div>
+        <h3>Aviso de Privacidad</h3>
+        <p class="subtitle">Última actualización: Julio 2026</p>
+
+        <!-- Área de Lectura de Privacidad -->
+        <div class="terms-content">
+            
+            <h4>1. Identidad y Domicilio del Responsable</h4>
+            <p><strong>Gym Control</strong> (en adelante "nosotros", "nuestro" o la "Empresa"), actúa como responsable del tratamiento de los datos personales de sus clientes directos (propietarios y administradores de gimnasios que contratan el servicio SaaS). Nuestro compromiso es salvaguardar la privacidad y seguridad de la información compartida a través de nuestra plataforma.</p>
+
+            <h4>2. Datos que Recabamos</h4>
+            <p>Para la creación de cuentas y prestación del servicio SaaS, recabamos los siguientes datos de los administradores y staff:</p>
+            <ul>
+                <li>Nombre completo y cargo (Manager, Receptionist, Owner).</li>
+                <li>Datos de contacto: correo electrónico corporativo o personal, y número de teléfono.</li>
+                <li>Información de facturación fiscal (RFC o Tax ID) y domicilio del gimnasio.</li>
+                <li>Datos de cobro para suscripciones (Estos datos son tokenizados directamente por nuestro procesador de pagos, Mercado Pago, y nunca se almacenan en los servidores de Gym Control).</li>
+            </ul>
+
+            <h4>3. Uso de la Información</h4>
+            <p>La información personal recopilada de los usuarios administradores se utiliza exclusivamente para las siguientes finalidades primarias:</p>
+            <ul>
+                <li>Crear y gestionar el acceso seguro a su panel de control (Dashboard).</li>
+                <li>Procesar y administrar los cobros recurrentes de su suscripción SaaS.</li>
+                <li>Enviar notificaciones importantes sobre el sistema, avisos de seguridad y alertas de mantenimiento.</li>
+                <li>Ofrecer soporte técnico y asistencia relacionada con el uso de la plataforma.</li>
+            </ul>
+
+            <h4>4. Privacidad de los "Usuarios Finales" (Members)</h4>
+            <p>Gym Control es una plataforma B2B (Business-to-Business). Respecto a la información de los miembros y clientes finales de cada gimnasio (nombres, licencias, fechas de pago), <strong>Gym Control actúa únicamente como "Encargado" (Procesador de Datos)</strong>. El propietario del gimnasio que contrata nuestro software es el único Responsable legal de recolectar, tratar y obtener el consentimiento de sus clientes. Gym Control garantiza que estos datos están encriptados, aislados en bases de datos seguras y nunca serán contactados, comercializados ni cedidos a terceros.</p>
+
+            <h4>5. Transferencia de Datos</h4>
+            <p>No vendemos, rentamos ni compartimos su información personal. Únicamente transferimos los datos estrictamente necesarios a nuestro proveedor de pasarela de pagos (Mercado Pago) para la tokenización y cobro autorizado de las suscripciones, cumpliendo con las normativas de seguridad PCI-DSS.</p>
+
+            <h4>6. Ejercicio de Derechos ARCO</h4>
+            <p>Como titular de sus datos personales, usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse (Derechos ARCO) al tratamiento de los mismos. Puede ejercer estos derechos, así como revocar su consentimiento, enviando una solicitud directa a nuestro equipo de soporte técnico o desde las configuraciones de su cuenta administrador.</p>
+            
+        </div>
+
+        <!-- Acción de Regreso -->
+        <button class="btn-login" onclick="window.history.back()">Entendido y Regresar</button>
+
+    </div>
+
+</body>
+</html>
