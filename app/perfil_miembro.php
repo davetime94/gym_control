@@ -23,7 +23,6 @@ require_once __DIR__ . "/../components/security.php";
         .badge.Activa { background-color: #28a745; }
         .badge.Vencida { background-color: #dc3545; }
         .badge.Cancelada { background-color: #6c757d; }
-        .btn-save { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%;}
     </style>
 </head>
 

@@ -98,8 +98,6 @@ foreach($ventasStats as $v) {
         .card { background: var(--white); border-radius: 20px; padding: 25px; box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.08); }
         .filtros { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; align-items: center; }
         .filtros input { padding: 10px 15px; border-radius: 12px; border: 1px solid #e0e5f2; background: #f4f7fe; outline: none; }
-        .btn-filter { background: var(--primary); color: white; border: none; padding: 10px 25px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn-filter:hover { transform: translateY(-2px); box-shadow: 0px 5px 15px rgba(67, 97, 238, 0.3); }
 
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 15px; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; border-bottom: 1px solid #f4f7fe; }

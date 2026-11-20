@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style1.css?v=1.3">
+    <title>Tabla de Botones | GYMULTIMATE</title>
+    <style>
+        body {
+            padding: 40px 20px;
+            max-width: 1250px;
+            margin: 0 auto;
+            background: #f4f7fe;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-main);
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 12px 35px rgba(112, 144, 176, 0.1);
+            overflow-x: auto;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f4f7fe;
+        }
+
+        .header-title h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .header-title p {
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box input {
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: 1px solid #e0e5f2;
+            background: #f4f7fe;
+            font-size: 0.9rem;
+            outline: none;
+            width: 250px;
+            transition: 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.15);
+        }
+
+        /* Tabla */
+        table.buttons-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        table.buttons-table th {
+            padding: 16px 18px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-bottom: 2px solid #f4f7fe;
+            font-weight: 700;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+        }
+
+        table.buttons-table td {
+            padding: 16px 18px;
+            border-bottom: 1px solid #f4f7fe;
+            vertical-align: middle;
+            font-size: 0.9rem;
+        }
+
+        table.buttons-table tbody tr:hover td {
+            background: #fafcff;
+        }
+
+        /* Badges de Categoría */
+        .cat-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .cat-primary {
+            background: #eef2ff;
+            color: #4361ee;
+        }
+
+        .cat-success {
+            background: #e6fff9;
+            color: #05cd99;
+        }
+
+        .cat-danger {
+            background: #fff0f0;
+            color: #ee5d50;
+        }
+
+        .cat-secondary {
+            background: #f4f7fe;
+            color: #2b3674;
+        }
+
+        .cat-nav {
+            background: #f0f2f5;
+            color: #55627a;
+        }
+
+        code {
+            background: #f4f7fe;
+            color: #4361ee;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid #e8effd;
+        }
+
+        .file-tag {
+            display: inline-block;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            margin: 2px;
+            white-space: nowrap;
+        }
+
+        .btn-preview-cell {
+            min-width: 170px;
+        }
+
+        @media(max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .table-card {
+                padding: 15px;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="table-card">
+        <!-- Encabezado de la Tabla -->
+        <div class="header-section">
+            <div class="header-title">
+                <h2>Tabla Centralizada de Botones</h2>
+                <p>Todos los botones del sistema con sus estilos concentrados en <code>styles/style1.css</code></p>
+            </div>
+            <div class="search-box">
+                <input type="text" id="buscador" placeholder="🔍 Filtrar botón o clase..." onkeyup="filtrarTabla()">
+            </div>
+        </div>
+
+        <!-- Tabla Completa de Botones -->
+        <table class="buttons-table" id="tablaBotones">
+            <thead>
+                <tr>
+                    <th style="width: 45px;">#</th>
+                    <th>Botón en Vivo</th>
+                    <th>Clase CSS</th>
+                    <th>Color / Categoría</th>
+                    <th>Función / Propósito</th>
+                    <th>Ubicación en el Proyecto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 01: btn-create -->
+                <tr>
+                    <td><strong>01</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-create">Crear Usuario</button></td>
+                    <td><code>.btn .btn-create</code></td>
+                    <td><span class="cat-badge cat-primary">Primario (Azul)</span></td>
+                    <td>Creación de colaboradores, administradores y altas nuevas.</td>
+                    <td>
+                        <span class="file-tag">administar_personal.php</span>
+                        <span class="file-tag">new_gym.php</span>
+                        <span class="file-tag">configuracion.php</span>
+                    </td>
+                </tr>
+
+                <!-- 02: btn-primary -->
+                <tr>
+                    <td><strong>02</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-primary">Acción Principal</button></td>
+                    <td><code>.btn .btn-primary</code></td>
+                    <td><span class="cat-badge cat-primary">Primario (Azul)</span></td>
+                    <td>Acción principal en centros de comando y tableros.</td>
+                    <td><span class="file-tag">manager.php</span></td>
+                </tr>
+
+                <!-- 03: btn-save -->
+                <tr>
+                    <td><strong>03</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-save">Guardar Cambios</button></td>
+                    <td><code>.btn .btn-save</code></td>
+                    <td><span class="cat-badge cat-success">Éxito (Verde)</span></td>
+                    <td>Guardar ediciones en filas de tabla y formularios de datos.</td>
+                    <td>
+                        <span class="file-tag">administar_personal.php</span>
+                        <span class="file-tag">perfil_miembro.php</span>
+                    </td>
+                </tr>
+
+                <!-- 04: btn-guardar -->
+                <tr>
+                    <td><strong>04</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-guardar">Guardar</button></td>
+                    <td><code>.btn .btn-guardar</code></td>
+                    <td><span class="cat-badge cat-success">Éxito (Verde)</span></td>
+                    <td>Confirmar actualizaciones en fichas de clientes y socios.</td>
+                    <td><span class="file-tag">editarclientes.php</span></td>
+                </tr>
+
+                <!-- 05: btn-delete -->
+                <tr>
+                    <td><strong>05</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-delete">Eliminar</button></td>
+                    <td><code>.btn .btn-delete</code></td>
+                    <td><span class="cat-badge cat-danger">Peligro (Outline)</span></td>
+                    <td>Eliminar registros con aviso preventivo (fondo blanco, hover rojo).</td>
+                    <td><span class="file-tag">administar_personal.php</span></td>
+                </tr>
+
+                <!-- 06: btn-eliminar -->
+                <tr>
+                    <td><strong>06</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-eliminar">Eliminar Cliente</button></td>
+                    <td><code>.btn .btn-eliminar</code></td>
+                    <td><span class="cat-badge cat-danger">Peligro (Outline)</span></td>
+                    <td>Dar de baja definitiva a un cliente.</td>
+                    <td><span class="file-tag">editarclientes.php</span></td>
+                </tr>
+
+                <!-- 07: btn-danger -->
+                <tr>
+                    <td><strong>07</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-danger">Borrar Todo</button></td>
+                    <td><code>.btn .btn-danger</code></td>
+                    <td><span class="cat-badge cat-danger">Peligro (Sólido)</span></td>
+                    <td>Acciones críticas, revocación inmediata o cancelación de licencias.</td>
+                    <td><span class="file-tag">Acciones Críticas</span></td>
+                </tr>
+
+                <!-- 08: btn-search -->
+                <tr>
+                    <td><strong>08</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-search">Buscar Cliente</button></td>
+                    <td><code>.btn-search</code></td>
+                    <td><span class="cat-badge cat-primary">Búsqueda (Azul)</span></td>
+                    <td>Consultas rápidas en tablas de socios, historial y logs.</td>
+                    <td>
+                        <span class="file-tag">administrar_clientes.php</span>
+                        <span class="file-tag">table_logs.php</span>
+                        <span class="file-tag">configuracion.php</span>
+                    </td>
+                </tr>
+
+                <!-- 09: btn-buscar -->
+                <tr>
+                    <td><strong>09</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-buscar">Buscar</button></td>
+                    <td><code>.btn-buscar</code></td>
+                    <td><span class="cat-badge cat-primary">Búsqueda (Azul)</span></td>
+                    <td>Búsqueda por número o ID en formulario de edición.</td>
+                    <td><span class="file-tag">editarclientes.php</span></td>
+                </tr>
+
+                <!-- 10: btn-filter -->
+                <tr>
+                    <td><strong>10</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-filter">Aplicar Filtros</button></td>
+                    <td><code>.btn-filter</code></td>
+                    <td><span class="cat-badge cat-primary">Filtro (Azul)</span></td>
+                    <td>Filtrar reportes por rango de fechas, montos y estatus.</td>
+                    <td><span class="file-tag">dashboard_pagos.php</span></td>
+                </tr>
+
+                <!-- 11: btn-save-member -->
+                <tr>
+                    <td><strong>11</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-save-member">Guardar Miembro</button></td>
+                    <td><code>.btn-save-member</code></td>
+                    <td><span class="cat-badge cat-primary">Formulario (Azul)</span></td>
+                    <td>Enviar formulario de alta de nuevos miembros.</td>
+                    <td><span class="file-tag">add_clientes_form.php</span></td>
+                </tr>
+
+                <!-- 12: btn-crear -->
+                <tr>
+                    <td><strong>12</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-crear">Enviar Solicitud</button></td>
+                    <td><code>.btn-crear</code></td>
+                    <td><span class="cat-badge cat-primary">Soporte (Azul)</span></td>
+                    <td>Creación y envío de tickets de soporte técnico.</td>
+                    <td><span class="file-tag">soporte.php</span></td>
+                </tr>
+
+                <!-- 13: btn-outline -->
+                <tr>
+                    <td><strong>13</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-outline">Cancelar / Cerrar</button></td>
+                    <td><code>.btn .btn-outline</code></td>
+                    <td><span class="cat-badge cat-secondary">Contorno (Gris)</span></td>
+                    <td>Acción secundaria, cancelar edición o cerrar modales.</td>
+                    <td><span class="file-tag">manager.php</span></td>
+                </tr>
+
+                <!-- 14: btn-secondary -->
+                <tr>
+                    <td><strong>14</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-secondary">Secundario</button></td>
+                    <td><code>.btn .btn-secondary</code></td>
+                    <td><span class="cat-badge cat-secondary">Contorno (Gris)</span></td>
+                    <td>Opciones neutras alternativas dentro de formularios.</td>
+                    <td><span class="file-tag">Componentes</span></td>
+                </tr>
+
+                <!-- 15: btn-login -->
+                <tr>
+                    <td><strong>15</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-login"
+                            style="padding: 10px 18px;">Ingresar</button></td>
+                    <td><code>.btn-login</code></td>
+                    <td><span class="cat-badge cat-primary">Acceso (Azul)</span></td>
+                    <td>Botón de inicio de sesión y recuperación de contraseña.</td>
+                    <td>
+                        <span class="file-tag">access_logs.php</span>
+                        <span class="file-tag">forgot_password.php</span>
+                    </td>
+                </tr>
+
+                <!-- 16: tab-btn -->
+                <tr>
+                    <td><strong>16</strong></td>
+                    <td class="btn-preview-cell">
+                        <div style="display: flex; gap: 4px;">
+                            <button class="tab-btn active" style="padding: 6px 10px; font-size: 0.8rem;">Activo</button>
+                            <button class="tab-btn" style="padding: 6px 10px; font-size: 0.8rem;">Inactivo</button>
+                        </div>
+                    </td>
+                    <td><code>.tab-btn</code> <code>.active</code></td>
+                    <td><span class="cat-badge cat-nav">Pestaña</span></td>
+                    <td>Alternar entre diferentes vistas y subpaneles.</td>
+                    <td><span class="file-tag">manager.php</span></td>
+                </tr>
+
+                <!-- 17: support-btn -->
+                <tr>
+                    <td><strong>17</strong></td>
+                    <td class="btn-preview-cell"><a href="#" class="support-btn" onclick="return false;">💬 Soporte
+                            WA</a></td>
+                    <td><code>.support-btn</code></td>
+                    <td><span class="cat-badge cat-success">WhatsApp (Degradado)</span></td>
+                    <td>Enlace directo a WhatsApp de asistencia en la barra superior.</td>
+                    <td><span class="file-tag">navbar.php</span></td>
+                </tr>
+
+                <!-- 18: logout-btn -->
+                <tr>
+                    <td><strong>18</strong></td>
+                    <td class="btn-preview-cell"><button class="logout-btn" title="Cerrar Sesión">⏻</button></td>
+                    <td><code>.logout-btn</code></td>
+                    <td><span class="cat-badge cat-danger">Sesión (Rojo)</span></td>
+                    <td>Botón cuadrado rojo para salir de la cuenta de forma segura.</td>
+                    <td><span class="file-tag">navbar.php</span></td>
+                </tr>
+
+                <!-- 19: btn:disabled -->
+                <tr>
+                    <td><strong>19</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-create" disabled>Bloqueado</button></td>
+                    <td><code>.btn[disabled]</code></td>
+                    <td><span class="cat-badge cat-nav">Inactivo</span></td>
+                    <td>Botón desactivado cuando falta información obligatoria.</td>
+                    <td>
+                        <span class="file-tag">soporte.php</span>
+                        <span class="file-tag">General</span>
+                    </td>
+                </tr>
+
+                <!-- 20: btn-block -->
+                <tr>
+                    <td><strong>20</strong></td>
+                    <td class="btn-preview-cell"><button class="btn btn-create btn-block"
+                            style="font-size: 0.75rem; padding: 8px;">100% Ancho</button></td>
+                    <td><code>.btn .btn-block</code></td>
+                    <td><span class="cat-badge cat-secondary">Modificador</span></td>
+                    <td>Expande cualquier botón para abarcar el ancho total del contenedor.</td>
+                    <td><span class="file-tag">Formularios</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Script de filtrado en vivo -->
+    <script>
+        function filtrarTabla() {
+            const input = document.getElementById("buscador");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("tablaBotones");
+            const tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                const rowText = tr[i].textContent || tr[i].innerText;
+                if (rowText.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

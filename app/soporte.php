@@ -52,6 +52,7 @@ if (isset($_POST['crear_ticket']) && $puedeCrear) {
 <head>
     <meta charset="UTF-8">
     <title>Soporte Técnico | Horizon Gym</title>
+    <link rel="stylesheet" href="../styles/style1.css?v=<?= time(); ?>">
     <style>
         :root {
             --primary: #4361ee;
@@ -113,24 +114,6 @@ if (isset($_POST['crear_ticket']) && $puedeCrear) {
             background: #f4f7fe;
             outline: none;
             box-sizing: border-box;
-        }
-
-        .btn-crear {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            border-radius: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-crear:disabled {
-            background: #e0e5f2;
-            cursor: not-allowed;
-            color: var(--text-muted);
         }
 
         .lock-msg {

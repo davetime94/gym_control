@@ -228,9 +228,6 @@ $manage_gym_id = $_GET['gym_id'] ?? null;
 
         /* Command Center Tabs */
         .tabs-nav { display: flex; gap: 10px; border-bottom: 2px solid #e0e5f2; margin-bottom: 25px; }
-        .tab-btn { padding: 12px 25px; background: none; border: none; font-size: 0.95rem; font-weight: 700; color: #a3aed0; cursor: pointer; border-bottom: 3px solid transparent; transition: 0.3s; }
-        .tab-btn.active { color: #4361ee; border-bottom-color: #4361ee; }
-        .tab-btn:hover:not(.active) { color: #2b3674; }
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
         
@@ -239,12 +236,6 @@ $manage_gym_id = $_GET['gym_id'] ?? null;
         label { display: block; font-size: 0.8rem; font-weight: 700; color: #2b3674; margin-bottom: 8px; }
         input, select, textarea { width: 100%; padding: 12px 15px; border-radius: 12px; border: 1px solid #e0e5f2; background: #f4f7fe; font-family: inherit; font-size: 0.9rem; color: #2b3674; transition: 0.3s; }
         input:focus, select:focus, textarea:focus { border-color: #4361ee; background: white; box-shadow: 0 4px 15px rgba(67,97,238,0.1); outline: none; }
-        
-        .btn-action { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; text-decoration: none; border: none; cursor: pointer; transition: 0.2s; }
-        .btn-primary { background: #4361ee; color: white; }
-        .btn-primary:hover { background: #364fc7; box-shadow: 0 4px 15px rgba(67,97,238,0.3); }
-        .btn-outline { background: white; border: 2px solid #e0e5f2; color: #2b3674; }
-        .btn-outline:hover { border-color: #2b3674; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         

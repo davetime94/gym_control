@@ -294,10 +294,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     }
     input:focus, select:focus, textarea:focus { border-color: var(--primary); background: #fff; box-shadow: 0 4px 12px rgba(67, 97, 238, 0.1); }
 
-    .btn { padding: 12px 20px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 0.85rem; width: 100%; }
-    .btn-create { background: var(--primary); color: white; }
-    .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-
     .status-badge { padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: inline-block; }
     .status-active { background-color: rgba(5, 205, 153, 0.15); color: var(--success); }
     .status-pending { background-color: rgba(255, 140, 0, 0.15); color: var(--warning); }

@@ -345,17 +345,6 @@ select {
     margin-top: 5px;
 }
 
-.btn-search {
-    background: #4361ee;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 150px;
-    margin-top: 10px;
-}
-
 .information_div {
     color: #535353;
     justify-content: space-between;
@@ -413,38 +402,215 @@ span:hover {
     margin: 0;
 }
 
-/* Botones Generales */
-.btn {
+/* ========================================================================= */
+/* BOTONES DEL SISTEMA (CENTRALIZADOS) */
+/* ========================================================================= */
+
+/* 1. Base para todos los botones */
+.btn,
+.btn-action,
+.btn-search,
+.btn-buscar,
+.btn-filter,
+.btn-login,
+.btn-crear,
+.btn-save-member {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     padding: 10px 20px;
     border-radius: 12px;
     border: none;
     font-weight: 700;
-    cursor: pointer;
-    transition: 0.3s;
     font-size: 0.85rem;
-    display: inline-block;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-sizing: border-box;
     text-align: center;
 }
 
-.btn-create {
+.btn:hover,
+.btn-action:hover,
+.btn-search:hover,
+.btn-buscar:hover,
+.btn-filter:hover,
+.btn-login:hover,
+.btn-crear:hover,
+.btn-save-member:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+.btn:active,
+.btn-action:active,
+.btn-search:active,
+.btn-buscar:active,
+.btn-filter:active,
+.btn-login:active,
+.btn-crear:active,
+.btn-save-member:active {
+    transform: translateY(0);
+}
+
+.btn:disabled,
+.btn-action:disabled,
+.btn-crear:disabled,
+.btn-create:disabled,
+.btn-search:disabled {
+    background: #e0e5f2 !important;
+    color: var(--text-muted) !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 0.65;
+}
+
+/* 2. Botón Primario / Crear / Buscar / Filtrar (Azul Principal) */
+.btn-primary,
+.btn-create,
+.btn-crear,
+.btn-search,
+.btn-buscar,
+.btn-filter,
+.btn-login,
+.btn-save-member {
     background: var(--primary);
     color: white;
 }
 
-.btn-save {
+.btn-primary:hover,
+.btn-create:hover,
+.btn-crear:hover,
+.btn-search:hover,
+.btn-buscar:hover,
+.btn-filter:hover,
+.btn-login:hover,
+.btn-save-member:hover {
+    background: #364fc7;
+    box-shadow: 0px 8px 18px rgba(67, 97, 238, 0.3);
+}
+
+/* 3. Botón Guardar / Éxito (Verde) */
+.btn-save,
+.btn-guardar,
+.btn-success {
     background: var(--success);
     color: white;
 }
 
-.btn-delete {
-    background: #fff;
-    color: var(--danger);
-    border: 1px solid #ee5d5030;
+.btn-save:hover,
+.btn-guardar:hover,
+.btn-success:hover {
+    background: #04b385;
+    box-shadow: 0px 8px 18px rgba(5, 205, 153, 0.3);
 }
 
-.btn:hover {
+/* 4. Botón Eliminar / Peligro (Rojo) */
+.btn-delete,
+.btn-eliminar {
+    background: #fff;
+    color: var(--danger);
+    border: 1px solid rgba(238, 93, 80, 0.35);
+}
+
+.btn-delete:hover,
+.btn-eliminar:hover {
+    background: var(--danger);
+    color: white;
+    box-shadow: 0px 8px 18px rgba(238, 93, 80, 0.3);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #d84538;
+    box-shadow: 0px 8px 18px rgba(238, 93, 80, 0.3);
+}
+
+/* 5. Botón Contorno / Secundario */
+.btn-outline,
+.btn-secondary {
+    background: white;
+    border: 2px solid #e0e5f2;
+    color: var(--text-main);
+}
+
+.btn-outline:hover,
+.btn-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: #f4f7fe;
+}
+
+/* 6. Pestañas / Tabs */
+.tab-btn {
+    padding: 12px 25px;
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: 0.3s;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.tab-btn:hover:not(.active) {
+    color: var(--text-main);
+}
+
+/* 7. Botones de Navegación y Utilidades */
+.support-btn {
+    text-decoration: none;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: 0.25s;
+}
+
+.support-btn:hover {
     transform: translateY(-2px);
-    filter: brightness(1.1);
+    box-shadow: 0px 6px 15px rgba(34, 197, 94, 0.3);
+}
+
+.logout-btn {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}
+
+/* 8. Modificadores de Ancho */
+.btn-block,
+.btn-full {
+    width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -556,19 +722,24 @@ span:hover {
     }
 
     /* Botones Modo Oscuro */
-    .btn-login,
-    .btn-search {
-        background: var(--primary);
-    }
-
-    .btn-login:hover {
-        box-shadow: 0px 10px 20px rgba(90, 120, 255, 0.4);
-    }
-
-    .btn-delete {
+    .btn-delete,
+    .btn-eliminar {
         background: rgba(238, 93, 80, 0.15);
         color: #ff6b6b;
         border: 1px solid rgba(238, 93, 80, 0.3);
+    }
+
+    .btn-delete:hover,
+    .btn-eliminar:hover {
+        background: var(--danger);
+        color: white;
+    }
+
+    .btn-outline,
+    .btn-secondary {
+        background: #1e293b;
+        border-color: #2a3550;
+        color: var(--text-main);
     }
 
 
