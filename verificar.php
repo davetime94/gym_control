@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validar contraseñas
     if ($pass1 !== $pass2) {
-        header("Location: registro.php?error=Las contraseñas no coinciden");
+        header("Location: app/crear_cuenta.php?error=Las contraseñas no coinciden");
         exit();
     }
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $checkEmail = $conn->prepare("SELECT id FROM users_admin WHERE email = ?");
         $checkEmail->execute([$email]);
         if ($checkEmail->fetch()) {
-            header("Location: registro.php?error=Este correo electrónico ya está registrado.");
+            header("Location: app/crear_cuenta.php?error=Este correo electrónico ya está registrado.");
             exit();
         }
 
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         } catch (Exception $e) {
             // Si el correo falla, lo devolvemos con error para no dejarlo trabado en una pantalla vacía
-            header("Location: registro.php?error=No se pudo enviar el correo de verificación. Por favor revisa tu cuenta.");
+            header("Location: app/crear_cuenta.php?error=No se pudo enviar el correo de verificación. Por favor revisa tu cuenta.");
             exit();
         }
 
@@ -96,10 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
 
     } catch (PDOException $e) {
-        header("Location: registro.php?error=Error en el servidor: " . $e->getMessage());
+        header("Location: app/crear_cuenta.php?error=Error en el servidor: " . $e->getMessage());
         exit();
     }
 } else {
-    header("Location: registro.php");
+    header("Location: app/crear_cuenta.php");
     exit();
 }

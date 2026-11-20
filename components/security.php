@@ -1,12 +1,20 @@
 <?php
-require_once __DIR__ . "/../conn.php";
+require_once __DIR__ . "/../data/conn.php";
 
 $limite_tiempo = 28800; 
 $tiempo_transcurrido = 0;
 
+// Helper para determinar ruta de redirección según el contexto actual
+$is_in_app = (strpos($_SERVER['PHP_SELF'], '/app/') !== false);
+$is_in_funciones = (strpos($_SERVER['PHP_SELF'], '/funciones/') !== false);
+
+$login_url = $is_in_app ? 'index.php' : ($is_in_funciones ? '../app/index.php' : 'app/index.php');
+$logout_url = $is_in_app ? '../funciones/logout.php' : ($is_in_funciones ? 'logout.php' : 'funciones/logout.php');
+$dashboard_url = $is_in_app ? 'clientes.php' : ($is_in_funciones ? '../app/clientes.php' : 'app/clientes.php');
+
 // 1. Validar primero que exista sesión activa
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: " . $login_url);
     exit();
 }
 
@@ -16,7 +24,7 @@ if (isset($_SESSION['sesion_creada'])) {
     if ($tiempo_transcurrido > $limite_tiempo) {
         session_unset();
         session_destroy();
-        header("Location: logout.php");
+        header("Location: " . $logout_url);
         exit();
     }
 } else {
@@ -32,7 +40,7 @@ if ($bloqueo && !empty($bloqueo['bloqueado_hasta'])) {
     if (strtotime($bloqueo['bloqueado_hasta']) > time()) {
         session_unset();
         session_destroy();
-        header("Location: logout.php");
+        header("Location: " . $logout_url);
         exit();
     }
 }
@@ -67,8 +75,9 @@ if (!empty($resultado_gym['expiracion']) && $resultado_gym['expiracion'] <= $hoy
 // Helper para verificar roles permitidos en páginas protegidas
 if (!function_exists('check_role')) {
     function check_role($allowed_roles = []) {
+        global $dashboard_url;
         if (!isset($_SESSION['rol']) || !in_array($_SESSION['rol'], (array)$allowed_roles)) {
-            header("Location: clientes.php");
+            header("Location: " . $dashboard_url);
             exit();
         }
     }

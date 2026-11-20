@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/config.php';
-include("conn.php");
+include("data/conn.php");
 
 require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
@@ -10,6 +9,15 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 $mensaje="";
+
+if (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'Owner') {
+        header("Location: app/manager.php");
+    } else {
+        header("Location: app/clientes.php");
+    }
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -239,7 +247,11 @@ $mail->Body = '
 $mail->send();
 
 
-        header("Location: clientes.php");
+        if (isset($user['rol']) && $user['rol'] === 'Owner') {
+            header("Location: app/manager.php");
+        } else {
+            header("Location: app/clientes.php");
+        }
         exit();
 
     } else {
@@ -285,7 +297,7 @@ $mail->send();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="styles_loginform.css">
+    <link rel="stylesheet" href="styles/styles_loginform.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 
@@ -317,10 +329,9 @@ $mail->send();
             </form>
 
             <div class="footer-links">
-                <a href="forgot_password.php">¿Olvidaste tu contraseña?</a>
-                <a href="#">Contactar soporte técnico</a>
-                <a href="crear_cuenta.php">Crear cuenta</a>
-
+                <a href="app/forgot_password.php">¿Olvidaste tu contraseña?</a>
+                <a href="app/soporte.php">Contactar soporte técnico</a>
+                <a href="app/crear_cuenta.php">Crear cuenta</a>
             </div>
 
         </div>

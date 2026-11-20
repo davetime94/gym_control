@@ -1,6 +1,6 @@
 
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../styles/style1.css">
 <?php
 
 //Usuarios activos
@@ -52,7 +52,7 @@
 
     <div style="display: flex; flex-direction: row; height: fit-content;" class="card">
         <div>
-            <img  height="50px" src="recursos/perfil-de-usuario.png" alt="">
+            <img  height="50px" src="../recursos/perfil-de-usuario.png" alt="">
         </div>
 
         <div>
@@ -63,7 +63,7 @@
     </div>
 
     <div style="display: flex; flex-direction: row; height: fit-content;" class="card">
-        <div><img  height="50px" src="recursos/usuarios_vencidos.png" alt=""></div>
+        <div><img  height="50px" src="../recursos/usuarios_vencidos.png" alt=""></div>
 
         <div>
             <b><p style="color: orange;" >Clientes Vencidos</p></b>

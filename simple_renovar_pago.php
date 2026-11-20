@@ -5,7 +5,7 @@ include("components/security.php");
 
 <h2>Renovar pago</h2> <br>
 
-<form method='post'  action='log_renovar_pago.php' style='flex-direction: column; '>
+<form method='post'  action='funciones/log_renovar_pago.php' style='flex-direction: column; '>
     <div class="card" style="flex-direction: column;">
         <label >Ingresa ID de miebro</label><br>
 

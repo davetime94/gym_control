@@ -11,7 +11,7 @@ $gymData = $stmtGym->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
-<link rel="stylesheet" href="style1.css">
+<link rel="stylesheet" href="../styles/style1.css">
 <aside class="sidebar-crm">
     <div class="sidebar-header">
         <div class="logo-container">
@@ -71,7 +71,7 @@ $gymData = $stmtGym->fetch(PDO::FETCH_ASSOC);
             
             <hr><br>
             <p class="menu-category">Herramientas extra</p>
-            <a href="auditoria.php" class="menu-item <?php echo ($pagina_actual == 'auditoria.php') ? 'active' : ''; ?>">
+            <a href="../funciones/auditoria.php" class="menu-item">
                 Auditoría
             </a>
             
@@ -100,8 +100,8 @@ $gymData = $stmtGym->fetch(PDO::FETCH_ASSOC);
             
             <div>
                 <hr></br>
-                <a class="menu-item" href="terminos.html">Terminos y condiciones</a>
-                <a class="menu-item" href="privacidad.html">Aviso de privacidad</a>
+                <a class="menu-item" href="../terminos.html">Terminos y condiciones</a>
+                <a class="menu-item" href="../privacidad.html">Aviso de privacidad</a>
 
             </div>
 

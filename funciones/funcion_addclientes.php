@@ -1,5 +1,5 @@
 <?php
-    include("conn.php");
+    require_once __DIR__ . '/../data/conn.php';
 
     //Para obtener los datos de la cuenta y del gym 
 $stmtUser = $conn->prepare("SELECT * FROM users_admin WHERE id = ?");
