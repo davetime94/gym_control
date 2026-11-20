@@ -1,4 +1,3 @@
-
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
     width: 6px;
@@ -24,6 +23,7 @@
     scrollbar-width: thin;
     scrollbar-color: #888 transparent;
 }
+
 :root {
     --primary: #4361ee;
     --dark: #111c44;
@@ -32,35 +32,49 @@
     --bg-gradient: linear-gradient(135deg, #f4f7fe 0%, #e0e5f2 100%);
     --white: #ffffff;
     --error: #ea4335;
-    --shadow: 1px 1px 10px 1px rgba(0,0,0,0.1);
+    --shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
     --backgroundWhatsapp: linear-gradient(180deg, #1bc04d 100%, #6bda9d 100%);
+
+    --success: #05cd99;
+    --danger: #ee5d50;
+    --text-main: #2b3674;
+    --text-muted: #a3aed0;
+    --bg-card: #ffffff;
+}
+
+
+/*SECTIONS*/
+
+.content_section {
+    padding: 30px;
 }
 
 
 
-.success{
-    background:#22c55e20;
-    color:#4ade80;
-    border:1px solid #22c55e;
+.success {
+    background: #22c55e20;
+    color: #4ade80;
+    border: 1px solid #22c55e;
 }
 
-.warning{
-    background:#f59e0b20;
-    color:#fbbf24;
-    border:1px solid #f59e0b;
+.warning {
+    background: #f59e0b20;
+    color: #fbbf24;
+    border: 1px solid #f59e0b;
 }
 
-.danger{
-    background:#ef444420;
-    color:#f87171;
-    border:1px solid #ef4444;
+.danger {
+    background: #ef444420;
+    color: #f87171;
+    border: 1px solid #ef4444;
 }
 
-.fit{
+.fit {
     height: fit-content;
     width: fit-content;
     padding: 50px;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -101,7 +115,8 @@
     padding-right: 20px;
     border-right: 1px solid #e0e5f2;
 }
-.div_info{
+
+.div_info {
     display: flex;
     flex-direction: column;
 
@@ -126,7 +141,7 @@
 }
 
 /*li, conjunto de listas lista*/
-.li_personalizado{
+.li_personalizado {
     color: var(--text-main);
 }
 
@@ -146,9 +161,10 @@
     color: #a3aed0;
     transition: 0.3s;
 }
-.ani:hover{
+
+.ani:hover {
     transform: translateY(-3px);
-    box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.02);
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.02);
     transition: .6s;
 
 
@@ -167,9 +183,10 @@ body {
     flex-direction: column;
 }
 
-main{
+main {
     display: grid;
-    grid-template-columns: 15% 85%;}
+    grid-template-columns: 15% 85%;
+}
 
 
 
@@ -281,21 +298,84 @@ main{
 }
 
 
-        .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; padding: 20px; }
-        .card { display: flex; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 25px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { text-align: left; color: #a3aed0; padding: 10px; }
-        td { padding: 12px 10px; border-bottom: 1px solid #f4f7fe; }
-        .badge-owner { background: #eef2ff; color: #4361ee; }
-        input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e0e5f2; margin-top: 5px; }
-        .btn-search { background: #4361ee; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; width: 150px; margin-top: 10px; }
-        .information_div{color: #535353; justify-content: space-between; display: flex; flex-direction: row; margin: 5px; padding: 2px;}
-        span{color: #111c44; cursor: pointer;}
-        span:hover{
-            border-bottom: solid #111c44 3px ;
-            transition: 1s;
-        }
-.horizontador{
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    padding: 20px;
+}
+
+.card {
+    display: flex;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+th {
+    text-align: left;
+    color: #a3aed0;
+    padding: 10px;
+}
+
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #f4f7fe;
+}
+
+.badge-owner {
+    background: #eef2ff;
+    color: #4361ee;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e0e5f2;
+    margin-top: 5px;
+}
+
+.btn-search {
+    background: #4361ee;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 150px;
+    margin-top: 10px;
+}
+
+.information_div {
+    color: #535353;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    padding: 2px;
+}
+
+span {
+    color: #111c44;
+    cursor: pointer;
+}
+
+span:hover {
+    border-bottom: solid #111c44 3px;
+    transition: 1s;
+}
+
+.horizontador {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -303,12 +383,12 @@ main{
 
 
 
-.side_info{
+.side_info {
     position: fixed;
     height: 100vh;
     background-color: #eef2ff;
     border-radius: 6px;
-    box-sizing: 1px 1px 10px 1px rgba(0,0,0,0.1);
+    box-sizing: 1px 1px 10px 1px rgba(0, 0, 0, 0.1);
     right: 0;
     top: 0;
     padding: 20px;
@@ -320,8 +400,53 @@ main{
 }
 
 
-        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .header-flex h2 { font-weight: 800; font-size: 1.8rem; margin: 0; }
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-flex h2 {
+    font-weight: 800;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+/* Botones Generales */
+.btn {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 0.85rem;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-create {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-save {
+    background: var(--success);
+    color: white;
+}
+
+.btn-delete {
+    background: #fff;
+    color: var(--danger);
+    border: 1px solid #ee5d5030;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --primary: #5a78ff;
@@ -338,12 +463,12 @@ main{
         color: var(--text-main);
     }
 
-    .agent-nav{
+    .agent-nav {
         background-color: #020617;
     }
 
     /* Navbar */
- 
+
 
     .agent-name {
         color: var(--text-main);
@@ -362,11 +487,13 @@ main{
     .card,
     .login-box {
         background: #1e293b;
-        box-shadow: 0px 10px 30px rgba(0,0,0,0.4);
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
         border: 1px solid #2a3550;
     }
 
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
         color: var(--text-main);
     }
 
@@ -398,9 +525,19 @@ main{
         border-bottom: 1px solid #2a3550;
         color: var(--text-main);
     }
-.sidebar-crm{
-    height: 100vh;
-}
+
+    .sidebar-crm {
+        height: 100vh;
+    }
+
+    .table-card {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.08);
+        overflow-x: auto;
+    }
+
     /* Badges */
     .badge-owner {
         background: rgba(90, 120, 255, 0.2);
@@ -408,7 +545,7 @@ main{
     }
 
 
-    .expandido{
+    .expandido {
         width: 300px;
     }
 
@@ -418,19 +555,20 @@ main{
         border-left: 1px solid #2a3550;
     }
 
-    /* Botones */
+    /* Botones Modo Oscuro */
     .btn-login,
     .btn-search {
         background: var(--primary);
     }
-    .merchado_pago{
-        font-size: 18px;
-          gap: 10px;
-    }
 
     .btn-login:hover {
         box-shadow: 0px 10px 20px rgba(90, 120, 255, 0.4);
-      
+    }
+
+    .btn-delete {
+        background: rgba(238, 93, 80, 0.15);
+        color: #ff6b6b;
+        border: 1px solid rgba(238, 93, 80, 0.3);
     }
 
 
@@ -454,66 +592,108 @@ main{
 
 
 @keyframes mover {
-    0%   { transform: scale(1); }
-    50%  { transform: scale(1.03); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
-.animation_alert{
-animation: mover 5s ease-in-out infinite;}
+.animation_alert {
+    animation: mover 5s ease-in-out infinite;
+}
 
 
 
 
 
 /* ========================================================================= */
-        /* ADAPTACIÓN MÓVIL (RESPONSIVE) */
-        /* ========================================================================= */
-        @media (max-width: 768px) {
-            /* Apilar el layout (Sidebar arriba, contenido abajo) */
-            .app-main { flex-direction: column !important; }
-            .app-sidebar { width: 100% !important; height: auto !important; border-bottom: 2px solid #e0e5f2; }
-            .app-content { height: auto !important; overflow-y: visible !important; }
-            
-            /* Ajustar espaciados de la caja principal */
-            .admin-wrapper { padding: 15px; }
-            .page-title { font-size: 1.5rem; }
-            
-            /* Hacer que las pestañas (Tabs) se puedan deslizar hacia los lados */
-            .tabs-nav { 
-                overflow-x: auto; 
-                white-space: nowrap; 
-                flex-wrap: nowrap; 
-                padding-bottom: 8px; 
-                -webkit-overflow-scrolling: touch; 
-            }
-            .tab-btn { padding: 10px 15px; font-size: 0.85rem; }
-            
-            /* Ajustar formularios para que abarquen el 100% */
-            .form-grid { grid-template-columns: 1fr; gap: 15px; }
-            
-            /* Ajuste de filtros en los encabezados de las tablas */
-            table.master-table th { white-space: nowrap; }
-            table.master-table th select { 
-                width: 100%; 
-                margin-top: 8px; 
-                font-size: 0.8rem; 
-                padding: 6px; 
-            }
-            
-            /* Botones de acción ocupan el 100% del ancho para ser fáciles de tapear */
-            .btn-action.btn-outline, .btn-action.btn-primary { 
-                width: 100%; 
-                justify-content: center; 
-                margin-bottom: 10px; 
-            }
-            
-            /* Encabezados y Layouts Flexibles */
-            .mobile-stack {
-                flex-direction: column;
-                align-items: flex-start !important;
-                gap: 10px;
-            }
-        }
+/* ADAPTACIÓN MÓVIL (RESPONSIVE) */
+/* ========================================================================= */
+@media (max-width: 768px) {
 
-        .badge { padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; }
+    /* Apilar el layout (Sidebar arriba, contenido abajo) */
+    .app-main {
+        flex-direction: column !important;
+    }
+
+    .app-sidebar {
+        width: 100% !important;
+        height: auto !important;
+        border-bottom: 2px solid #e0e5f2;
+    }
+
+    .app-content {
+        height: auto !important;
+        overflow-y: visible !important;
+    }
+
+    /* Ajustar espaciados de la caja principal */
+    .admin-wrapper {
+        padding: 15px;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    /* Hacer que las pestañas (Tabs) se puedan deslizar hacia los lados */
+    .tabs-nav {
+        overflow-x: auto;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-btn {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+
+    /* Ajustar formularios para que abarquen el 100% */
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* Ajuste de filtros en los encabezados de las tablas */
+    table.master-table th {
+        white-space: nowrap;
+    }
+
+    table.master-table th select {
+        width: 100%;
+        margin-top: 8px;
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    /* Botones de acción ocupan el 100% del ancho para ser fáciles de tapear */
+    .btn-action.btn-outline,
+    .btn-action.btn-primary {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    /* Encabezados y Layouts Flexibles */
+    .mobile-stack {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}

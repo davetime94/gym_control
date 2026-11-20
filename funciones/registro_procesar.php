@@ -12,7 +12,8 @@ require 'PHPMailer/src/SMTP.php';
 
 session_start();
 require_once __DIR__ . '/config.php';
-include("conn.php");
+require_once __DIR__ . '/../data/conn.php';
+require_once __DIR__ . '/../components/security.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = trim($_POST['nombre']);
