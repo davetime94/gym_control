@@ -15,6 +15,8 @@ $fecha_30_dias = date('Y-m-d', strtotime($fecha_actual . ' + 30 days'));
     <meta charset="UTF-8">
     <title>Añadir Cliente</title>
     <link rel="stylesheet" href="../styles/style1.css">
+    <link rel="stylesheet" href="../styles/add_clientes.css">
+
 </head>
 <body>
 
