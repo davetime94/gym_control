@@ -12,7 +12,7 @@ if (isset($_SESSION['gym_id'])) {
     $stmt_total->execute([$_SESSION['gym_id']]);
     $resultado_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
 
-    //CONTEO DE EXPIRACIÓN DE MEMBERS
+    //CONTEO DE EXPIRACIÓN DE LICENCIAS
     $stmt_memberStatus=$conn->prepare(" SELECT 
     SUM(status_licencia = 'Activa' ) as active,
     SUM(status_licencia = 'Vencida') as expired
@@ -38,6 +38,21 @@ if (isset($_SESSION['gym_id'])) {
     //PERSONAL DE CADA GIMNASIO
     $stmt_personal = $conn->prepare("SELECT * FROM users_admin WHERE gym_id = ? AND (rol = 'Manager' OR rol = 'Receptionist') ORDER BY id DESC");
     $stmt_personal->execute([$_SESSION['gym_id']]);
+
+
+    $stmt_accesCount = $conn->prepare("SELECT 
+            SUM(acceso_concedido = 1) AS '1',
+            SUM(acceso_concedido = 0) AS '0'
+            FROM access_logs
+            WHERE gym_id = ?
+            AND fecha_hora >= CURDATE()
+            AND fecha_hora < CURDATE() + INTERVAL 1 DAY
+        ");
+
+        $stmt_accesCount->execute([$_SESSION['gym_id']]);
+        $AcessCounts = $stmt_accesCount->fetch(PDO::FETCH_ASSOC);
+
+
 
 
 
