@@ -10,20 +10,7 @@ require_once __DIR__ . "/../components/security.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../recursos/icon.png" type="image/x-icon">
     <title>Perfil 360 del Miembro | GymSync</title>
-    <link rel="stylesheet" href="../styles/style1.css">
-    <style>
-        /* Estilos complementarios para el layout 360 */
-        .search-bar { width: 100%; padding: 15px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 20px;}
-        .dashboard-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
-        .card-360 { flex: 1 1 300px; min-width: 300px; } /* Usando tu clase base de card pero adaptable */
-        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
-        .form-group label { font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #555; }
-        .form-group input, .form-group select { padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
-        .badge { padding: 5px 10px; border-radius: 20px; font-weight: bold; font-size: 12px; color: white; display: inline-block;}
-        .badge.Activa { background-color: #28a745; }
-        .badge.Vencida { background-color: #dc3545; }
-        .badge.Cancelada { background-color: #6c757d; }
-    </style>
+    <link rel="stylesheet" href="../styles/style1.css?v=<?= time(); ?>">
 </head>
 
 <body>

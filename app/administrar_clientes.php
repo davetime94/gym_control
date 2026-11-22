@@ -51,74 +51,11 @@ if (isset($_GET['buscar']) && !empty(trim($_GET['buscar']))) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Miembro</title>
-    <link rel="stylesheet" href="../styles/style1.css">
+    <link rel="stylesheet" href="../styles/style1.css?v=<?= time(); ?>">
     <style>
-        
         .a_6 {
             background-color: var(--hover);
             color: var(--white);
-        }
-        
-        /* Ajustes específicos para la vista usando tus variables */
-        .profile-layout {
-            display: flex;
-            flex-direction: row;            
-            gap: 25px;
-            margin-top: 20px;
-        }
-        
-        .profile-photo-container {
-            text-align: center;
-        }
-        
-        .profile-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 20px;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-            margin-bottom: 15px;
-            box-shadow: var(--shadow);
-        }
-
-        .data-grid {
-            display: flex;
-            flex-direction: column;            
-            gap: 20px;
-        }
-
-        .data-item label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-
-        .data-item p {
-            font-size: 1rem;
-            color: var(--text-main);
-            font-weight: 600;
-            margin-top: 5px;
-        }
-
-        /* Reutilizando tu lógica de alertas (success, warning, danger) */
-        .badge-status {
-            padding: 8px 15px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            display: inline-block;
-        }
-        .status-Activa { background: #22c55e20; color: #4ade80; border: 1px solid #22c55e; }
-        .status-Vencida { background: #ef444420; color: #f87171; border: 1px solid #ef4444; }
-        .status-Cancelada { background: #f59e0b20; color: #fbbf24; border: 1px solid #f59e0b; }
-        .panel-card{
-            box-shadow: var(--shadow);
-        }
-
-        @media (max-width: 768px) {
-            .profile-layout { grid-template-columns: 1fr; }
         }
     </style>
 </head>

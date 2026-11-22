@@ -57,59 +57,6 @@ foreach($ventasStats as $v) {
     <meta charset="UTF-8">
     <title>Pagos | Horizon Gym</title>
     <link rel="stylesheet" href="../styles/style1.css">
-    <style>
-        :root {
-            --primary: #4361ee;
-            --success: #05cd99;
-            --warning: #ffb547;
-            --text-main: #2b3674;
-            --text-muted: #a3aed0;
-            --white: #ffffff;
-        }
-
-        body { font-family: 'Inter', sans-serif; background: #f4f7fe; margin: 0; }
-        main { display: grid; grid-template-columns: 250px 1fr; }
-        .content-area { padding: 30px; }
-
-        /* WIDGETS */
-        .stats-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-            gap: 20px; 
-            margin-bottom: 30px; 
-        }
-        .stat-card { 
-            background: var(--white); 
-            padding: 20px; 
-            border-radius: 20px; 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.08); 
-        }
-        .icon-circle { 
-            width: 50px; height: 50px; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; font-size: 1.2rem; 
-        }
-        .stat-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin: 0; }
-        .stat-value { font-size: 1.4rem; color: var(--text-main); font-weight: 700; margin: 0; }
-
-        /* FILTROS & TABLA */
-        .card { background: var(--white); border-radius: 20px; padding: 25px; box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.08); }
-        .filtros { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; align-items: center; }
-        .filtros input { padding: 10px 15px; border-radius: 12px; border: 1px solid #e0e5f2; background: #f4f7fe; outline: none; }
-
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 15px; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; border-bottom: 1px solid #f4f7fe; }
-        td { padding: 15px; border-bottom: 1px solid #f4f7fe; color: var(--text-main); font-size: 0.9rem; }
-        .monto-pago { color: var(--success); font-weight: 700; }
-        .ticket-id { font-weight: 700; color: var(--primary); }
-
-        @media (prefers-color-scheme: dark) {
-            input{background-color: gray;}
-            
-        }
-    </style>
 </head>
 <body>
 
@@ -119,13 +66,13 @@ foreach($ventasStats as $v) {
     <section><?php include("../components/sidebar.php"); ?></section>
 
 
-    <section class="content-area">
+    <section class="content">
         <h2 style="color: var(--text-main); font-weight: 800; margin-bottom: 5px;">Dashboard de Pagos</h2>
         <p style="color: var(--text-muted); margin-bottom: 25px;">Control de ingresos y transacciones</p>
 
         <!-- 📊 WIDGETS -->
-        <div class="stats-grid">
-            <div class="stat-card">
+        <div class="stats-grid card">
+            <div class="stat-card card">
                 <div class="icon-circle" style="background: #e6fff9; color: #05cd99;">$</div>
                 <div class="stat-content">
                     <p class="stat-label">Hoy</p>
@@ -166,7 +113,7 @@ foreach($ventasStats as $v) {
                 <button class="btn-filter">Aplicar Filtros</button>
             </form>
 
-            <table>
+            <table class="">
                 <thead>
                     <tr>
                         <th>ID</th>

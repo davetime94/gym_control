@@ -1,5 +1,5 @@
 const secreto = document.getElementById("secreto");
-const contactinfo = {email:'davetime94@gmail.com',numero:3312345678};
+const contactinfo = { email: 'davetime94@gmail.com', numero: 3312345678 };
 const menu_actions = document.getElementById("menu_actions");
 const menu_buscar_clientes = document.getElementById("menu_buscar_clientes");
 const usuario = "David";
@@ -13,49 +13,50 @@ const fecha_30_dias = fecha.setDate(fecha.getDate() + 30);
 
 
 
-const logs=[];
+const logs = [];
 
-function mostrar_addmembers(){
-    
-    addmemberdiv.style.transform="translateX(0px)";
-    addmemberdiv.style.transition=".4s";
+function mostrar_addmembers() {
+
+    addmemberdiv.style.transform = "translateX(0px)";
+    addmemberdiv.style.transition = ".4s";
 }
 
-function esconder_addmembers(){
-addmemberdiv.style.transform="translateX(400px)";
-addmemberdiv.style.transition=".4s";
+function esconder_addmembers() {
+    addmemberdiv.style.transform = "translateX(400px)";
+    addmemberdiv.style.transition = ".4s";
 
-
-
-}
-
-function mostrar_menu(){
-    
-    menu_actions.style.transform="translateX(0px)";
-    menu_actions.style.transition=".4s";
-}
-
-function esconder_menu(){
-menu_actions.style.transform="translateX(400px)";
-menu_actions.style.transition=".4s";
-menu_buscar_clientes.style.transform="translateX(700px)";
-menu_buscar_clientes.style.transition=".4s";
 
 
 }
 
+function mostrar_menu() {
+
+    menu_actions.style.transform = "translateX(0px)";
+    menu_actions.style.transition = ".4s";
+}
+
+function esconder_menu() {
+    menu_actions.style.transform = "translateX(400px)";
+    menu_actions.style.transition = ".4s";
+    menu_buscar_clientes.style.transform = "translateX(700px)";
+    menu_buscar_clientes.style.transition = ".4s";
 
 
-function buscar_clientes(){
-    menu_buscar_clientes.style.transform="translateX(0px)";
-    menu_buscar_clientes.style.transition=".4s";
+}
+
+
+
+function buscar_clientes() {
+    menu_buscar_clientes.style.transform = "translateX(0px)";
+    menu_buscar_clientes.style.transition = ".4s";
 }
 
 
 
 
-function mostrar(){
-console.log(addmemberdiv);}
+function mostrar() {
+    console.log(addmemberdiv);
+}
 mostrar();
 
 
@@ -64,12 +65,12 @@ mostrar();
 estados.forEach(el => {
     const texto = el.innerText.trim();
 
-    if (texto === 'Activa'){
+    if (texto === 'Activa') {
         el.classList("activo");
-        
-    } else if (texto === 'Vencida'){
+
+    } else if (texto === 'Vencida') {
         el.style.color = "orange";
-    } else if (texto === 'Cancelada'){
+    } else if (texto === 'Cancelada') {
         el.style.color = "red";
     }
 });
@@ -84,7 +85,7 @@ const fechaHasta = document.getElementById("fechaHasta");
 const filtroAccion = document.getElementById("filtroAccion");
 const contador = document.getElementById("contador");
 
-function filtrar(){
+function filtrar() {
 
     const texto = buscador.value.toLowerCase();
     const usuario = filtroUsuario.value.toLowerCase();
@@ -108,24 +109,24 @@ function filtrar(){
         let mostrar = true;
 
         // 🔍 búsqueda general
-        if(texto && !contenido.includes(texto)) mostrar = false;
+        if (texto && !contenido.includes(texto)) mostrar = false;
 
         // 👤 usuario
-        if(usuario && !nombre.includes(usuario)) mostrar = false;
+        if (usuario && !nombre.includes(usuario)) mostrar = false;
 
         // 🆔 user id
-        if(userID && id !== userID) mostrar = false;
+        if (userID && id !== userID) mostrar = false;
 
         // 📅 fechas
-        if(desde && fecha < desde) mostrar = false;
-        if(hasta && fecha > hasta) mostrar = false;
+        if (desde && fecha < desde) mostrar = false;
+        if (hasta && fecha > hasta) mostrar = false;
 
         // ⚡ acción (texto dentro de descripción)
-        if(accion && !descripcion.includes(accion)) mostrar = false;
+        if (accion && !descripcion.includes(accion)) mostrar = false;
 
         fila.style.display = mostrar ? "" : "none";
 
-        if(mostrar) visibles++;
+        if (mostrar) visibles++;
     });
 
     contador.innerText = "Resultados: " + visibles;
@@ -137,7 +138,7 @@ document.querySelectorAll("input, select").forEach(el => {
 });
 
 // limpiar
-function limpiarFiltros(){
+function limpiarFiltros() {
     buscador.value = "";
     filtroUsuario.value = "";
     filtroUserID.value = "";

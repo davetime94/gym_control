@@ -84,56 +84,11 @@ foreach($movimientos as $m){
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../styles/style1.css">
+<link rel="stylesheet" href="../styles/style1.css?v=<?= time(); ?>">
 <title>Caja</title>
 
 <style>
-input, select{
-    padding:8px;
-    border-radius:8px;
-    border:1px solid #ddd;
-}
-
-.filtros{
-    display:flex;
-    flex-direction: row;
-    gap:10px;
-    margin-bottom:15px;
-    background-color: white;
-    padding: 10px 0px;
-    border-radius: 15px;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 1px 1px 10px 1px rgba(0,0,0,.1);
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-td, th{
-    padding:10px;
-    border-bottom:1px solid #eee;
-}
-
-tr:hover{
-    background:#f9fafb;
-}
-
-.pos{ color:#16a34a; font-weight:bold; }
-.neg{ color:#dc2626; font-weight:bold; }
-
-.ticket{
-    display:none;
-    background:#111;
-    color:#0f0;
-    padding:15px;
-    margin-top:10px;
-    font-family:monospace;
-}
-
-.a_10{
+.a_10 {
     background-color: var(--hover);
 }
 </style>
@@ -215,7 +170,7 @@ function filtrar(){
     <input type="number" step="0.01" name="monto" placeholder="Monto" required>
     <input type="text" name="nota" placeholder="Nota">
 
-    <button name="registrar">Registrar</button>
+    <button type="submit" name="registrar" class="btn btn-primary" style="margin-top: 10px;">Registrar Movimiento</button>
 
 </form>
 </div>
@@ -283,7 +238,7 @@ function filtrar(){
     <td><?php echo $m['created_at']; ?></td>
 
     <td>
-        <button type="button" onclick="toggleTicket(<?php echo $m['id']; ?>)">🧾</button>
+        <button type="button" class="btn btn-outline" style="padding: 4px 8px; font-size: 0.85rem;" onclick="toggleTicket(<?php echo $m['id']; ?>)">🧾</button>
     </td>
 </tr>
 

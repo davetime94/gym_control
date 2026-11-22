@@ -1,88 +1,87 @@
-<div class="content_information">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-        <div>
-            <h1 style="color: var(--text-main); font-weight: 700;">Bitácora de Actividades (Logs)</h1><br>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
-                Sesión de: <b><?php echo $_SESSION['nombre']; ?></b> | <span class="system-badge"><?php echo $_SESSION['rol']; ?></span>
-            </p>
-        </div>
-        <span id="contador" style="color: var(--primary); font-weight: 700; font-size: 0.9rem;"></span>
-    </div>
+<!-- Filtros Superiores usando clase centralizada .filtros -->
+<div class="filtros" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; align-items: center;">
+    <input type="text" id="buscador" placeholder="🔍 Buscar en descripción..." style="flex: 2; min-width: 200px;">
+    <input type="text" id="filtroUsuario" placeholder="👤 Usuario..." style="flex: 1; min-width: 140px;">
+    <input type="number" id="filtroUserID" placeholder="# ID" style="width: 95px;">
+    
+    <select id="filtroAccion" style="flex: 1; min-width: 160px;">
+        <option value="">Todas las acciones</option>
+        <option value="Añadió">Añadió (INSERT)</option>
+        <option value="Eliminó">Eliminó (DELETE)</option>
+        <option value="Editó">Editó (UPDATE)</option>
+        <option value="UPDATE">UPDATE</option>
+        <option value="DELETE">DELETE</option>
+        <option value="INSERT">INSERT</option>
+    </select>
 
-    <!-- 🔥 FILTROS PRO -->
-    <div style="display:flex; gap:12px; flex-wrap:wrap; margin:20px 0; align-items: center;">
-        <input type="text" id="buscador" placeholder="Buscar en descripción..." style="flex: 1; min-width: 200px;">
+    <input type="date" id="fechaDesde" title="Fecha inicial" style="width: 140px;">
+    <input type="date" id="fechaHasta" title="Fecha final" style="width: 140px;">
 
-        <input type="text" id="filtroUsuario" placeholder="Nombre usuario..." style="width: 180px;">
+    <button type="button" onclick="limpiarFiltros()" class="btn btn-outline" style="padding: 10px 16px;">
+        🔄 Limpiar
+    </button>
 
-        <input type="number" id="filtroUserID" placeholder="User ID" style="width: 100px;">
+    <button type="button" onclick="exportarExcel()" class="btn btn-save" style="padding: 10px 18px;">
+        📊 Exportar a Excel
+    </button>
+</div>
 
-        <select id="filtroAccion" style="width: 180px;">
-            <option value="">Todas las acciones</option>
-            <option value="Añadió">Añadió</option>
-            <option value="Eliminó">Eliminó</option>
-            <option value="Editó">Editó</option>
-            <option value="UPDATE">UPDATE</option>
-            <option value="DELETE">DELETE</option>
-            <option value="INSERT">INSERT</option>
-        </select>
+<!-- Tabla de Logs con .master-table centralizada -->
+<div style="width: 100%; overflow-x: auto;">
+    <table id="tablaLogs" class="master-table">
+        <thead>
+            <tr>
+                <th style="width: 170px;">Fecha y Hora</th>
+                <th>Usuario</th>
+                <th>Descripción</th>
+                <th style="text-align: center; width: 100px;">ID Usuario</th>
+                <th style="text-align: center; width: 90px;">Gym ID</th>
+                <th style="text-align: center; width: 130px;">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $stmt = $conn->prepare("SELECT * FROM logs WHERE gym_id = ? ORDER BY fecha_hora DESC");
+            $stmt->execute([$_SESSION['gym_id']]);
 
-        <div style="display: flex; gap: 8px; align-items: center;">
-            <small style="color: var(--text-muted);">Desde:</small>
-            <input type="date" id="fechaDesde">
-        </div>
-
-        <div style="display: flex; gap: 8px; align-items: center;">
-            <small style="color: var(--text-muted);">Hasta:</small>
-            <input type="date" id="fechaHasta">
-        </div>
-
-        <button onclick="limpiarFiltros()" class="btn-search" style="width: auto; padding: 10px 20px; margin-top:0; background: #ee5d50;">
-            Limpiar
-        </button>
-    </div>
-
-    <div class="card" style="width: 100%; overflow-x: auto;">
-        <table id="tablaLogs" style="width:100%;">
-            <thead>
-                <tr>
-                    <th>Fecha y Hora</th>
-                    <th>Usuario</th>
-                    <th>Descripción</th>
-                    <th>ID Usuario</th>
-                    <th>Gym ID</th>
-                    <th>Tipo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                $stmt = $conn->prepare("SELECT * FROM logs WHERE gym_id = ? ORDER BY fecha_hora DESC");
-                $stmt->execute([$_SESSION['gym_id']]);
-
-                while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ 
-                    // Color para el tipo de acción
-                    $tipoColor = "#a3aed0"; // Default
-                    if(stripos($row['tipo'], 'DELETE') !== false || stripos($row['tipo'], 'Eliminó') !== false) $tipoColor = "#ee5d50";
-                    if(stripos($row['tipo'], 'UPDATE') !== false || stripos($row['tipo'], 'Editó') !== false) $tipoColor = "#4361ee";
-                    if(stripos($row['tipo'], 'INSERT') !== false || stripos($row['tipo'], 'Añadió') !== false) $tipoColor = "#05cd99";
-
-                    echo "<tr>
-                        <td class='fecha' style='color: var(--text-muted); font-size: 0.8rem;'>{$row['fecha_hora']}</td>
-                        <td class='usuario' style='font-weight: 600; color: var(--text-main);'>{$row['quien']}</td>
-                        <td class='descripcion'>{$row['descripcion']}</td>
-                        <td class='userid' style='font-weight: 700;'>#{$row['user_id']}</td>
-                        <td>{$row['gym_id']}</td>
-                        <td>
-                            <span class='badge' style='background: {$tipoColor}15; color: {$tipoColor};'>
-                                {$row['tipo']}
-                            </span>
-                        </td>
-                    </tr>";
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ 
+                // Categorías visuales centralizadas (.cat-badge)
+                $badgeClass = "cat-badge cat-secondary";
+                if(stripos($row['tipo'], 'DELETE') !== false || stripos($row['tipo'], 'Eliminó') !== false) {
+                    $badgeClass = "cat-badge cat-danger";
+                } elseif(stripos($row['tipo'], 'UPDATE') !== false || stripos($row['tipo'], 'Editó') !== false) {
+                    $badgeClass = "cat-badge cat-primary";
+                } elseif(stripos($row['tipo'], 'INSERT') !== false || stripos($row['tipo'], 'Añadió') !== false) {
+                    $badgeClass = "cat-badge cat-success";
                 }
-                ?>
-            </tbody>
-        </table>
-    </div>
+            ?>
+            <tr>
+                <td class="fecha" data-fecha="<?php echo $row['fecha_hora']; ?>">
+                    <span style="color: var(--text-muted); font-size: 0.82rem; font-weight: 600;">
+                        🕒 <?php echo date('d/m/Y H:i:s', strtotime($row['fecha_hora'])); ?>
+                    </span>
+                </td>
+                <td class="usuario">
+                    <strong style="color: var(--text-main);"><?php echo htmlspecialchars($row['quien']); ?></strong>
+                </td>
+                <td class="descripcion" style="color: var(--text-main);">
+                    <?php echo htmlspecialchars($row['descripcion']); ?>
+                </td>
+                <td class="userid" style="text-align: center;">
+                    <span class="ticket-id" style="font-family: monospace; font-size: 0.9rem;">#<?php echo htmlspecialchars($row['user_id']); ?></span>
+                </td>
+                <td style="text-align: center;">
+                    <span style="color: var(--text-muted); font-size: 0.85rem;">#<?php echo htmlspecialchars($row['gym_id']); ?></span>
+                </td>
+                <td style="text-align: center;">
+                    <span class="<?php echo $badgeClass; ?>">
+                        <?php echo htmlspecialchars($row['tipo']); ?>
+                    </span>
+                </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 </div>
 
 <script>
@@ -108,12 +107,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         for (let i = 0; i < filas.length; i++) {
             const celdas = filas[i].getElementsByTagName('td');
+            if (celdas.length < 6) continue;
             
-            const txtFechaRaw = celdas[0].textContent;
+            const txtFechaRaw = celdas[0].getAttribute('data-fecha') || celdas[0].textContent;
             const txtFecha = new Date(txtFechaRaw);
             const txtUsuario = celdas[1].textContent.toLowerCase();
             const txtDesc = celdas[2].textContent.toLowerCase();
-            const txtUserID = celdas[3].textContent.replace('#', '');
+            const txtUserID = celdas[3].textContent.replace('#', '').trim();
             const txtAccion = celdas[5].textContent.trim();
 
             // Lógica de coincidencia
@@ -141,16 +141,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 filas[i].style.display = "none";
             }
         }
-        contador.textContent = `${visibles} registros encontrados`;
+        if (contador) {
+            contador.textContent = `${visibles} registros encontrados`;
+        }
     }
 
     // Agregar eventos a todos los filtros
     ids.forEach(id => el[id].addEventListener('input', filtrarLogs));
 
-    // Función para limpiar
+    // Función para limpiar filtros
     window.limpiarFiltros = function() {
         ids.forEach(id => el[id].value = "");
         filtrarLogs();
+    };
+
+    // Función para exportar a Excel con filtros activos
+    window.exportarExcel = function() {
+        const params = new URLSearchParams();
+        if (el.buscador && el.buscador.value) params.append('buscar', el.buscador.value.trim());
+        if (el.filtroUsuario && el.filtroUsuario.value) params.append('usuario', el.filtroUsuario.value.trim());
+        if (el.filtroUserID && el.filtroUserID.value) params.append('user_id', el.filtroUserID.value.trim());
+        if (el.filtroAccion && el.filtroAccion.value) params.append('accion', el.filtroAccion.value.trim());
+        if (el.fechaDesde && el.fechaDesde.value) params.append('fecha_desde', el.fechaDesde.value);
+        if (el.fechaHasta && el.fechaHasta.value) params.append('fecha_hasta', el.fechaHasta.value);
+        
+        const q = params.toString();
+        window.location.href = '../funciones/exportar_logs.php' + (q ? '?' + q : '');
     };
 
     filtrarLogs(); // Ejecución inicial

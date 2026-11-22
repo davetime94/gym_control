@@ -70,18 +70,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal | Horizon Gym</title>
     <link rel="stylesheet" href="../styles/style1.css?v=<?= time(); ?>">
-    <style>
-  
-        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .header-flex h2 { font-weight: 800; font-size: 1.8rem; margin: 0; }
-
-    
-        .form-inline { display: flex; gap: 15px; flex-wrap: wrap; }
-    
-        .status-badge { padding: 4px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
 </head>
 <body>
 
@@ -99,146 +87,145 @@
 
             <?php elseif($resultado_plan['status']=='Active'): ?>
 
-
-            <div class="header-flex">
-                <h2>Administrar Personal</h2>
-                <span style="color: var(--text-muted); font-weight: 600;">ID Gym: #<?php echo $_SESSION['gym_id']; ?></span>
-            </div>
-
-            <?php if($mensaje): ?>
-                <div class="alert alert-info"><?php echo $mensaje; ?></div>
-            <?php endif; ?><br>
-
-
-
-
-            <?php if($_SESSION['rol']=='Manager'): ?>
-            <div class="card" style="display:flex; flex-direction:column; gap:10px;">
-                <div>
-                    <h3>Registrar nuevo colaborador</h3>
+            <div class="card" style="display:flex; flex-direction: column;">
+                <div class="header-flex">
+                    <h2>Administrar Personal</h2>
+                    <span style="color: var(--text-muted); font-weight: 600;">ID Gym: #<?php echo $_SESSION['gym_id']; ?></span>
                 </div>
-                <div>
-                    <form method="POST" class="form-inline">
-                        <input type="text" name="nombre" placeholder="Nombre completo" required style="flex: 2;">
-                        <input type="email" name="email" placeholder="Correo electrónico" required style="flex: 2;">
-                        <input type="text" name="password" placeholder="Contraseña temporal" required style="flex: 1;">
-                        
-                        <select name="rol" style="flex: 1;">
-                            <option value="Receptionist">Recepcionista</option>
-                            <option value="Manager">Manager</option>
-                        </select>
 
-                        <button name="crear" class="btn btn-create">Crear Usuario</button>
-                    </form>
-                </div>
-            </div>
+                <?php if($mensaje): ?>
+                    <div class="alert alert-info"><?php echo $mensaje; ?></div>
+                <?php endif; ?>
 
-                <div class="card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre y Datos</th>
-                                <th>Rol</th>
-                                <th>Estatus del Sistema</th>
-                                <th>Acciones / Seguridad</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Query filtrando para no mostrar al Owner actual en la lista editable (seguridad)
-
-                            while($row = $stmt_personal->fetch(PDO::FETCH_ASSOC)):
-                            ?>
-                            <tr>
-                                <form id="form-user-<?php echo $row['id']; ?>" method="POST"></form>
-                                <input type="hidden" form="form-user-<?php echo $row['id']; ?>" name="id" value="<?php echo $row['id']; ?>">
-                                
-                                <td style="font-weight: 700; color: var(--text-muted);">#<?php echo $row['id']; ?></td>
-                                
-                                <td>
-                                    <div style="display: flex; flex-direction: column; gap: 5px;">
-                                        <input type="text" form="form-user-<?php echo $row['id']; ?>" name="nombre" value="<?php echo $row['nombre']; ?>" style="font-weight: 700; padding: 8px;">
-                                        <input type="email" form="form-user-<?php echo $row['id']; ?>" name="email" value="<?php echo $row['email']; ?>" style="font-size: 0.8rem; padding: 8px;">
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <select form="form-user-<?php echo $row['id']; ?>" name="rol">
-                                        <option value="Receptionist" <?php if($row['rol']=="Receptionist") echo "selected"; ?>>Recepcionista</option>
-                                        <option value="Manager" <?php if($row['rol']=="Manager") echo "selected"; ?>>Manager</option>
-                                    </select>
-                                </td>
-
-                                <td>
-                                    <select form="form-user-<?php echo $row['id']; ?>" name="status">
-                                        <option value="1" <?php if($row['status']==1) echo "selected"; ?>>🟢 Activo</option>
-                                        <option value="0" <?php if($row['status']==0) echo "selected"; ?>>🔴 Inactivo</option>
-                                    </select>
-                                </td>
-
-                                <td>
-                                    <div style="display: flex; gap: 8px; align-items: center;">
-                                        <input type="text" form="form-user-<?php echo $row['id']; ?>" name="password" placeholder="Nueva pass" style="width: 110px; font-size: 0.8rem; padding: 8px;">
-                                        <button form="form-user-<?php echo $row['id']; ?>" name="editar" class="btn btn-save" title="Guardar Cambios">Guardar</button>
-                                        <button form="form-user-<?php echo $row['id']; ?>" name="eliminar" class="btn btn-delete" onclick="return confirm('¿Estás seguro de eliminar este acceso?')">Eliminar</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
-                </div>
+                <?php if($_SESSION['rol']=='Manager'): ?>
                 
-                <?php elseif($_SESSION['rol']!='Manager'): ?>
-                                    <div class="table-card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre y Datos</th>
-                                <th>Rol</th>
-                                <th>Estatus del Sistema</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Query filtrando para no mostrar al Owner actual en la lista editable (seguridad)
-                            $stmt = $conn->prepare("SELECT * FROM users_admin WHERE gym_id = ? AND (rol = 'Manager' OR rol = 'Receptionist') ORDER BY id DESC");
-                            $stmt->execute([$_SESSION['gym_id']]);
+                    <div class="card" style="display:flex; flex-direction:column; gap:10px;">
+                        <div>
+                            <h3>Registrar nuevo colaborador</h3>
+                        </div>
+                        <div>
+                            <form method="POST" class="form-inline">
+                                <input type="text" name="nombre" placeholder="Nombre completo" required style="flex: 2;">
+                                <input type="email" name="email" placeholder="Correo electrónico" required style="flex: 2;">
+                                <input type="text" name="password" placeholder="Contraseña temporal" required style="flex: 1;">
+                                
+                                <select name="rol" style="flex: 1;">
+                                    <option value="Receptionist">Recepcionista</option>
+                                    <option value="Manager">Manager</option>
+                                </select>
 
-                            while($row = $stmt->fetch(PDO::FETCH_ASSOC)):
-                            ?>
-                            <tr>
-                                <form method="POST">
-                                    <small type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                <button name="crear" class="btn btn-create">Crear Usuario</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre y Datos</th>
+                                    <th>Rol</th>
+                                    <th>Estatus del Sistema</th>
+                                    <th>Acciones / Seguridad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Query filtrando para no mostrar al Owner actual en la lista editable (seguridad)
+
+                                while($row = $stmt_personal->fetch(PDO::FETCH_ASSOC)):
+                                ?>
+                                <tr>
+                                    <form id="form-user-<?php echo $row['id']; ?>" method="POST"></form>
+                                    <input type="hidden" form="form-user-<?php echo $row['id']; ?>" name="id" value="<?php echo $row['id']; ?>">
                                     
                                     <td style="font-weight: 700; color: var(--text-muted);">#<?php echo $row['id']; ?></td>
                                     
                                     <td>
                                         <div style="display: flex; flex-direction: column; gap: 5px;">
-                                            <p><?php echo htmlspecialchars($row['nombre']); ?></p>
-                                            <p><?php echo htmlspecialchars($row['email']); ?></p>
+                                            <input type="text" form="form-user-<?php echo $row['id']; ?>" name="nombre" value="<?php echo $row['nombre']; ?>" style="font-weight: 700; padding: 8px;">
+                                            <input type="email" form="form-user-<?php echo $row['id']; ?>" name="email" value="<?php echo $row['email']; ?>" style="font-size: 0.8rem; padding: 8px;">
                                         </div>
                                     </td>
 
                                     <td>
-                                        <p><?php echo htmlspecialchars($row['rol']); ?></p>
+                                        <select form="form-user-<?php echo $row['id']; ?>" name="rol">
+                                            <option value="Receptionist" <?php if($row['rol']=="Receptionist") echo "selected"; ?>>Recepcionista</option>
+                                            <option value="Manager" <?php if($row['rol']=="Manager") echo "selected"; ?>>Manager</option>
+                                        </select>
                                     </td>
 
                                     <td>
-                                        <span class="badge <?= ($row['status']=='1'?'success':'danger') ?>"><?php if($row['status']=="1"){ echo "Activo";}else{echo "Inactivo/pausado";} ?></span>
+                                        <select form="form-user-<?php echo $row['id']; ?>" name="status">
+                                            <option value="1" <?php if($row['status']==1) echo "selected"; ?>>🟢 Activo</option>
+                                            <option value="0" <?php if($row['status']==0) echo "selected"; ?>>🔴 Inactivo</option>
+                                        </select>
                                     </td>
 
+                                    <td>
+                                        <div style="display: flex; gap: 8px; align-items: center;">
+                                            <input type="text" form="form-user-<?php echo $row['id']; ?>" name="password" placeholder="Nueva pass" style="width: 110px; font-size: 0.8rem; padding: 8px;">
+                                            <button form="form-user-<?php echo $row['id']; ?>" name="editar" class="btn btn-save" title="Guardar Cambios">Guardar</button>
+                                            <button form="form-user-<?php echo $row['id']; ?>" name="eliminar" class="btn btn-delete" onclick="return confirm('¿Estás seguro de eliminar este acceso?')">Eliminar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <?php elseif($_SESSION['rol']!='Manager'): ?>
+                                        <div class="table-card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre y Datos</th>
+                                    <th>Rol</th>
+                                    <th>Estatus del Sistema</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Query filtrando para no mostrar al Owner actual en la lista editable (seguridad)
+                                $stmt = $conn->prepare("SELECT * FROM users_admin WHERE gym_id = ? AND (rol = 'Manager' OR rol = 'Receptionist') ORDER BY id DESC");
+                                $stmt->execute([$_SESSION['gym_id']]);
 
-                                </form>
-                            </tr>
-                            <?php endwhile; ?>
-                        </tbody>
-                    </table>
-                </div>
+                                while($row = $stmt->fetch(PDO::FETCH_ASSOC)):
+                                ?>
+                                <tr>
+                                    <form method="POST">
+                                        <small type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                        
+                                        <td style="font-weight: 700; color: var(--text-muted);">#<?php echo $row['id']; ?></td>
+                                        
+                                        <td>
+                                            <div style="display: flex; flex-direction: column; gap: 5px;">
+                                                <p><?php echo htmlspecialchars($row['nombre']); ?></p>
+                                                <p><?php echo htmlspecialchars($row['email']); ?></p>
+                                            </div>
+                                        </td>
 
-            <?php endif; ?>
+                                        <td>
+                                            <p><?php echo htmlspecialchars($row['rol']); ?></p>
+                                        </td>
+
+                                        <td>
+                                            <span class="badge <?= ($row['status']=='1'?'success':'danger') ?>"><?php if($row['status']=="1"){ echo "Activo";}else{echo "Inactivo/pausado";} ?></span>
+                                        </td>
+
+
+                                    </form>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                <?php endif; ?>
+            </div>
 
         <?php endif; ?>
 

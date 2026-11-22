@@ -1,12 +1,3 @@
-<style>
-    .badge {
-        border-radius: 20px;
-        padding: 4px 10px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        display: inline-block;
-    }
-</style>
 <div style="max-height: 800px; overflow-y: auto; width: 100%;" class="content_information">
 
     <!-- 🔍 SECCIÓN DE FILTROS -->

@@ -24,38 +24,8 @@ $denegadosHoy = $totalHoy - $exitosHoy;
 <head>
     <meta charset="UTF-8">
     <title>Registro de Accesos | Horizon Gym</title>
-    <link rel="stylesheet" href="../styles/style1.css">
-    <style>
-        /* Reutilizando tu sistema de diseño */
-        .stats-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
-            gap: 20px; 
-            margin-bottom: 25px; 
-        }
-        .status-pill { 
-            padding: 6px 12px; 
-            border-radius: 10px; 
-            font-size: 0.7rem; 
-            font-weight: 800; 
-            text-transform: uppercase;
-        }
-        .bg-success-light { background: #05cd9915; color: #05cd99; }
-        .bg-danger-light { background: #ee5d5015; color: #ee5d50; }
-        
-        .member-info { display: flex; flex-direction: column; }
-        .member-name { font-weight: 700; color: var(--text-main); font-size: 0.9rem; }
-        .member-id { color: var(--text-muted); font-size: 0.75rem; }
-    </style>
+    <link rel="stylesheet" href="../styles/style1.css?v=<?= time(); ?>">
 </head>
-<style>
-    .card{
-        gap:10px;
-    }
-    .center{
-        align-items: center;
-    }
-</style>
 <body>
 
     <?php include("../components/navbar.php"); ?>

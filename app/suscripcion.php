@@ -112,15 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['token'])) {
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        /* Ajustes precisos para los iframes de Mercado Pago para que encajen perfecto en Tailwind */
-        .mp-input-container { position: relative; }
-        .mp-input-container iframe { width: 100% !important; height: 100% !important; outline: none !important; border: none !important; background: transparent !important;}
-        
-        /* Ocultar el spinner por defecto */
-        .hidden-element { display: none; }
-    </style>
+    <link rel="stylesheet" href="../styles/style1.css?v=<?= time(); ?>">
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 

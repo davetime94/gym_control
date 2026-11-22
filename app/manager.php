@@ -195,61 +195,8 @@ $manage_gym_id = $_GET['gym_id'] ?? null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Torre de Control | Super Admin</title>
-    <link rel="stylesheet" href="../styles/style1.css">
+    <link rel="stylesheet" href="../styles/style1.css?v=<?= time(); ?>">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        /* CORE SUPER ADMIN STYLES */
-        .admin-wrapper { padding: 30px; }
-        .page-title { color: #2b3674; font-weight: 900; font-size: 2rem; margin-bottom: 5px; }
-        .page-subtitle { color: #a3aed0; font-size: 0.95rem; margin-bottom: 30px; }
-        
-        /* KPI & Attention Cards */
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .kpi-card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); display: flex; align-items: center; gap: 20px; }
-        .kpi-icon { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .kpi-val { font-size: 1.8rem; font-weight: 800; color: #2b3674; margin: 0; }
-        .kpi-label { font-size: 0.85rem; color: #a3aed0; font-weight: 600; text-transform: uppercase; }
-
-        /* Status Colors */
-        .st-green { background: rgba(5, 205, 153, 0.15); color: #05cd99; }
-        .st-yellow { background: rgba(255, 184, 28, 0.15); color: #ffb81c; }
-        .st-red { background: rgba(238, 93, 80, 0.15); color: #ee5d50; }
-        .st-blue { background: rgba(67, 97, 238, 0.15); color: #4361ee; }
-        
-        .badge { padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; }
-        
-        /* Tables */
-        .panel-card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); margin-bottom: 30px; overflow-x: auto; }
-        .panel-card h3 { color: #2b3674; margin-top: 0; margin-bottom: 20px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
-        table.master-table { width: 100%; border-collapse: collapse; }
-        table.master-table th { text-align: left; padding: 15px 10px; color: #a3aed0; font-size: 0.75rem; text-transform: uppercase; border-bottom: 2px solid #f4f7fe; }
-        table.master-table td { padding: 15px 10px; border-bottom: 1px solid #f4f7fe; font-size: 0.9rem; color: #2b3674; font-weight: 500; }
-        table.master-table tr:hover td { background: #f8fafc; }
-
-        /* Command Center Tabs */
-        .tabs-nav { display: flex; gap: 10px; border-bottom: 2px solid #e0e5f2; margin-bottom: 25px; }
-        .tab-content { display: none; animation: fadeIn 0.4s ease; }
-        .tab-content.active { display: block; }
-        
-        /* Forms */
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        label { display: block; font-size: 0.8rem; font-weight: 700; color: #2b3674; margin-bottom: 8px; }
-        input, select, textarea { width: 100%; padding: 12px 15px; border-radius: 12px; border: 1px solid #e0e5f2; background: #f4f7fe; font-family: inherit; font-size: 0.9rem; color: #2b3674; transition: 0.3s; }
-        input:focus, select:focus, textarea:focus { border-color: #4361ee; background: white; box-shadow: 0 4px 15px rgba(67,97,238,0.1); outline: none; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Dark Mode Support (optional enhancement based on your css) */
-        @media(prefers-color-scheme: dark){
-            .page-title { color: white; }
-            .kpi-card, .panel-card { background: #1e293b; border: 1px solid #2a3550; }
-            .kpi-val, table.master-table td, label { color: white; }
-            input, select, textarea { background: #0f172a; border-color: #2a3550; color: white; }
-            table.master-table th { border-bottom-color: #2a3550; }
-            table.master-table td { border-bottom-color: #2a3550; }
-            table.master-table tr:hover td { background: #111c44; }
-        }
-    </style>
 </head>
 <body class="app-body">
 
@@ -895,23 +842,34 @@ ORDER BY
                         </form>
                     </div>
 
-                        <table class="master-table">
-                            <thead><tr><th>Fecha</th><th>Agente</th><th>Acción / Descripción</th><th>Notas Internas</th></tr></thead>
-                            <tbody>
-                                <?php
-                                $stmt_l = $conn->prepare("SELECT * FROM activityfeed_customer_service WHERE gym_id = ? ORDER BY created_at DESC LIMIT 50");
-                                $stmt_l->execute([$manage_gym_id]);
-                                while($l = $stmt_l->fetch(PDO::FETCH_ASSOC)):
-                                ?>
-                                <tr>
-                                    <td style="white-space:nowrap;"><?= date('d M y - H:i', strtotime($l['created_at'])) ?></td>
-                                    <td>Agente #<?= $l['agente'] ?></td>
-                                    <td><strong><?= htmlspecialchars($l['descripción']) ?></strong></td>
-                                    <td style="font-size:0.8rem; color:#666;"><?= htmlspecialchars($l['notas']) ?></td>
-                                </tr>
-                                <?php endwhile; ?>
-                            </tbody>
-                        </table>
+                    <div class="panel-card" style="margin-top: 25px;">
+                        <h3>Historial - Activity Feed</h3>
+                        <div style="overflow-x: auto;">
+                            <table class="master-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 140px;">Fecha</th>
+                                        <th style="width: 130px;">Agente</th>
+                                        <th>Acción / Descripción</th>
+                                        <th>Notas Internas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $stmt_l = $conn->prepare("SELECT * FROM activityfeed_customer_service WHERE gym_id = ? ORDER BY created_at DESC LIMIT 50");
+                                    $stmt_l->execute([$manage_gym_id]);
+                                    while($l = $stmt_l->fetch(PDO::FETCH_ASSOC)):
+                                    ?>
+                                    <tr>
+                                        <td style="white-space:nowrap; color: var(--text-muted); font-size: 0.82rem; font-weight: 600;">🕒 <?= date('d M y - H:i', strtotime($l['created_at'])) ?></td>
+                                        <td><span class="system-badge">Agente #<?= htmlspecialchars($l['agente']) ?></span></td>
+                                        <td><strong style="color: var(--text-main);"><?= htmlspecialchars($l['descripción']) ?></strong></td>
+                                        <td style="font-size:0.85rem; color: var(--text-muted);"><?= htmlspecialchars($l['notas']) ?></td>
+                                    </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

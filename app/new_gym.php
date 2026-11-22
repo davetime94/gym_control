@@ -144,75 +144,8 @@ $datastatus_result=$stmt_status_data->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../recursos/icon.png" type="image/x-icon">
     <title>Configuración de mi GYM | GymControl</title>
-    <link rel="stylesheet" href="../styles/style1.css">
-    <link rel="stylesheet" href="../styles/tables_style.css">
-
-    
+    <link rel="stylesheet" href="../styles/style1.css?v=<?= time(); ?>">
 </head>
-<style>
-    :root {
-        --primary: #4361ee;
-        --success: #05cd99;
-        --danger: #ee5d50;
-        --warning: #ff8c00;
-        --text-main: #2b3674;
-        --text-muted: #a3aed0;
-        --bg-card: #ffffff;
-    }
-
-    body { background-color: #f4f7fe; font-family: 'Inter', sans-serif; color: var(--text-main); margin: 0; }
-    main { display: grid; grid-template-columns: 250px 1fr; min-height: 100vh; }
-    .content { padding: 40px; }
-
-    .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-    .header-flex h2 { font-weight: 800; font-size: 1.8rem; margin: 0; }
-
-    .secciones-container { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 30px; align-items: start; }
-
-    .create-card { 
-        background: var(--bg-card); 
-        border-radius: 20px; 
-        padding: 25px; 
-        box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.08); 
-        margin-bottom: 30px;
-    }
-    .create-card h3 { margin-top: 0; font-size: 1.1rem; margin-bottom: 20px; color: var(--text-main); font-weight: 800; }
-    
-    .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f4f7fe; font-size: 0.9rem; }
-    .info-row strong { color: var(--text-main); }
-    .info-row span { color: #444; max-width: 60%; text-align: right; }
-
-    input, select, textarea {
-        padding: 12px 16px;
-        border-radius: 14px;
-        border: 1px solid #e0e5f2;
-        background: #f4f7fe;
-        color: var(--text-main);
-        font-size: 0.9rem;
-        outline: none;
-        transition: 0.3s;
-        width: 100%;
-        box-sizing: border-box;
-        margin-top: 5px;
-        margin-bottom: 15px;
-        font-family: inherit;
-    }
-    input:focus, select:focus, textarea:focus { border-color: var(--primary); background: #fff; box-shadow: 0 4px 12px rgba(67, 97, 238, 0.1); }
-
-    .status-badge { padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: inline-block; }
-    .status-active { background-color: rgba(5, 205, 153, 0.15); color: var(--success); }
-    .status-pending { background-color: rgba(255, 140, 0, 0.15); color: var(--warning); }
-
-    @media(prefers-color-scheme: dark){
-        body { background-color: #0f172a; }
-        .create-card { background: #1e293b; color: white; border-color: #2a3550; }
-        .info-row { border-bottom-color: #2a3550; justify-content: center;align-items: center;}
-        .info-row strong { color: white; }
-        .info-row span { color: #cbd5e0; }
-        input, select, textarea { background: #0f172a; border-color: #2a3550; color: white; }
-        .create-card h3 { color: white; }
-    }
-</style>
 <body>
 
 <?php include("../components/navbar.php"); ?>
@@ -342,7 +275,7 @@ $datastatus_result=$stmt_status_data->fetch(PDO::FETCH_ASSOC);
         </div>
 
         <!-- ================= SECCIÓN 2: FORMULARIO DE EDICIÓN MODULAR ================= -->
-        <?php if($_SESSION['rol']=='Manager'): ?>
+        <?php if(in_array($_SESSION['rol'] ?? '', ['Manager', 'Owner'])): ?>
             <div class="create-card">
                 <h3>Editar Configuración del Negocio</h3>
                 <form method="POST">
@@ -384,13 +317,16 @@ $datastatus_result=$stmt_status_data->fetch(PDO::FETCH_ASSOC);
                     <label style="font-weight: 700; font-size: 0.85rem;">Notas de Regulación / Observaciones Internas</label>
                     <textarea name="notas_regulacion" rows="3" placeholder="Añadir notas complementarias sobre licencias o uso de suelo..."><?= htmlspecialchars($gym_data['notas_regulacion'] ?? '') ?></textarea>
 
-                    <button type="submit" name="actualizar_gym" class="btn btn-create" style="margin-top: 10px;">
+                    <button type="submit" name="actualizar_gym" class="btn btn-create btn-block" style="margin-top: 10px;">
                         💾 Guardar Cambios y Solicitar Verificación
                     </button>
                 </form>
             </div>
-        <?php else:  ?>
-        <?php endif;  ?>
+        <?php else: ?>
+            <div class="create-card" style="text-align: center; color: var(--text-muted); padding: 30px 20px;">
+                <p>🔒 Solo los perfiles de Dueño (Owner) y Administrador (Manager) tienen permisos para editar la configuración comercial y legal del gimnasio.</p>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
 

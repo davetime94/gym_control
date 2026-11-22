@@ -36,25 +36,35 @@ if($_SESSION['rol']=='Owner'){
    
     <?php elseif($gymData['status']=='Active'): ?>
 
-        <h1>Mis clientes</h1>
+        <div style="display:flex; flex-direction: column;">
 
-        <div style="display: flex;flex-direction: row; max-width: fit-content; gap: 5px; "> 
-           
-            <div class="card">
-                <?php include ("../components/clientes_cards_status.php"); ?>
-            </div>
-            
-            <div class="card" style="height: fit-content;flex-direction:column; ">
-                <?php include("../components/simple_renovar_pago.php"); ?>
+            <div>
+                <h1>Mis clientes</h1>
             </div>
 
-            <div class="card" style="height: fit-content; ">
-                <?php include("../components/editarclientes.php"); ?>
-            </div>
+            <div style="display: flex;flex-direction: row; max-width: fit-content; gap: 5px; "> 
             
+                <div class="card">
+                    <?php include ("../components/clientes_cards_status.php"); ?>
+                </div>
+
+                
+                <div class="card" style="height: fit-content;flex-direction:column; ">
+                    <?php include("../components/simple_renovar_pago.php"); ?>
+                </div>
+
+                <div class="card" style="height: fit-content; ">
+                    <?php include("../components/editarclientes.php"); ?>
+                </div>
+
+                
+            </div>
+
+            <div>
+                <?php include("../components/tabla_de_clientes.php"); ?>
+            </div>
         </div>
-       
-        <?php include("../components/tabla_de_clientes.php"); ?>
+
     <?php endif; ?>
 
 </section>

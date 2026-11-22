@@ -42,10 +42,15 @@
     --bg-card: #ffffff;
 }
 
+.muted {
+    color: var(--text-muted);
+}
 
 /*SECTIONS*/
 
-.content_section {
+.content_section,
+.content-area,
+.content {
     padding: 30px;
 }
 
@@ -314,35 +319,590 @@ main {
     margin-bottom: 25px;
 }
 
-table {
+/* ========================================================================= */
+/* TABLAS, PANELES Y TARJETAS DEL SISTEMA (CENTRALIZADOS) */
+/* ========================================================================= */
+
+/* 1. Contenedores de Tablas y Paneles (Cards) */
+.panel-card,
+.table-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(112, 144, 176, 0.08);
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.panel-card h3,
+.table-card h3 {
+    color: var(--text-main);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 2. Estructura Principal de Tablas */
+table,
+table.master-table,
+table.buttons-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+}
+
+th,
+table.master-table th,
+table.buttons-table th {
+    text-align: left;
+    padding: 15px 12px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    border-bottom: 2px solid #f4f7fe;
+    white-space: nowrap;
+}
+
+td,
+table.master-table td,
+table.buttons-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #f4f7fe;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+tbody tr:hover td,
+table tr:hover td,
+table.master-table tr:hover td {
+    background: #f8fafc;
+}
+
+/* 3. Filtros Superiores de Tablas */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.filtros input,
+.filtros select {
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 1px solid #e0e5f2;
+    background: #f4f7fe;
+    outline: none;
+    font-size: 0.88rem;
+    transition: 0.3s;
+    width: auto;
+    margin-top: 0;
+}
+
+.filtros input:focus,
+.filtros select:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.1);
+}
+
+.center {
+    align-items: center;
+}
+
+/* 4. Valores y Formatos dentro de Tablas */
+.pos,
+.monto-pago {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.neg {
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.ticket-id {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.ticket {
+    display: none;
+    background: #111827;
+    color: #10b981;
+    padding: 15px;
+    margin-top: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 10px;
     font-size: 0.85rem;
 }
 
-th {
-    text-align: left;
-    color: #a3aed0;
-    padding: 10px;
+.member-info {
+    display: flex;
+    flex-direction: column;
 }
 
-td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #f4f7fe;
+.member-name {
+    font-weight: 700;
+    color: var(--text-main);
+    font-size: 0.9rem;
 }
 
+.member-id {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.form-inline {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* 5. Badges y Píldoras de Estado en Tablas */
+.badge,
+.status-badge,
+.badge-status,
+.status-pill {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* Estado: Activo / Éxito (Verde) */
+.status-active,
+.status-Activa,
+.bg-success-light,
+.badge.success,
+.st-green {
+    background-color: rgba(5, 205, 153, 0.15);
+    color: var(--success);
+    border: 1px solid rgba(5, 205, 153, 0.25);
+}
+
+/* Estado: Pendiente / Advertencia (Naranja / Amarillo) */
+.status-pending,
+.status-Cancelada,
+.st-yellow {
+    background-color: rgba(255, 184, 28, 0.15);
+    color: #d97706;
+    border: 1px solid rgba(255, 184, 28, 0.25);
+}
+
+/* Estado: Vencido / Peligro (Rojo) */
+.status-Vencida,
+.bg-danger-light,
+.badge.danger,
+.st-red {
+    background-color: rgba(238, 93, 80, 0.15);
+    color: var(--danger);
+    border: 1px solid rgba(238, 93, 80, 0.25);
+}
+
+/* Estado: Informativo / Azul */
+.st-blue,
 .badge-owner {
+    background-color: rgba(67, 97, 238, 0.15);
+    color: var(--primary);
+}
+
+/* 6. Tarjetas de Configuración y Filas Informativas */
+.secciones-container {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .secciones-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.create-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.08);
+    margin-bottom: 30px;
+}
+
+.create-card h3 {
+    margin-top: 0;
+    font-size: 1.15rem;
+    margin-bottom: 20px;
+    color: var(--text-main);
+    font-weight: 800;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f4f7fe;
+    font-size: 0.9rem;
+}
+
+.info-row strong {
+    color: var(--text-main);
+}
+
+.info-row span {
+    color: #555;
+    max-width: 60%;
+    text-align: right;
+}
+
+/* 7. Grids de Estadísticas y KPIs */
+.kpi-grid,
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.kpi-card,
+.stat-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(112, 144, 176, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.content-area {
+    padding: 30px;
+}
+
+.kpi-icon,
+.stat-icon,
+.icon-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.kpi-val,
+.stat-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.kpi-label,
+.stat-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 3px;
+}
+
+/* 8. Estructura General de Administración */
+.admin-wrapper {
+    padding: 30px;
+}
+
+.page-title {
+    color: var(--text-main);
+    font-weight: 900;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.page-subtitle {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 25px;
+}
+
+.tabs-nav {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid #e0e5f2;
+    margin-bottom: 25px;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 9. Formularios e Inputs Globales */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #e0e5f2;
+    background: #f4f7fe;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.12);
+}
+
+/* 10. Perfil de Miembro y Fichas de Detalle */
+.profile-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.profile-photo-container {
+    text-align: center;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+    margin-bottom: 15px;
+    box-shadow: var(--shadow);
+}
+
+.data-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.data-item label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.data-item p {
+    font-size: 1rem;
+    color: var(--text-main);
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .profile-layout {
+        flex-direction: column;
+    }
+}
+
+/* 11. Layout 360 y Fichas de Miembros */
+.search-bar {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 1px solid #e0e5f2;
+    margin-bottom: 20px;
+    background: #f4f7fe;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.dashboard-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.card-360 {
+    flex: 1 1 300px;
+    min-width: 300px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px 14px;
+    border: 1px solid #e0e5f2;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+/* 12. Utilidades de Pasarela de Pagos (Mercado Pago) */
+.mp-input-container {
+    position: relative;
+}
+
+.mp-input-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    outline: none !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.hidden-element {
+    display: none;
+}
+
+/* 13. Componentes de Cabecera y Catálogos */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f4f7fe;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-box input {
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid #e0e5f2;
+    background: #f4f7fe;
+    font-size: 0.9rem;
+    outline: none;
+    width: 250px;
+    transition: 0.3s;
+}
+
+.search-box input:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.15);
+}
+
+.cat-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.cat-primary {
     background: #eef2ff;
     color: #4361ee;
 }
 
-input,
-select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #e0e5f2;
-    margin-top: 5px;
+.cat-success {
+    background: #e6fff9;
+    color: #05cd99;
+}
+
+.cat-danger {
+    background: #fff0f0;
+    color: #ee5d50;
+}
+
+.cat-secondary {
+    background: #f4f7fe;
+    color: #2b3674;
+}
+
+.cat-nav {
+    background: #f0f2f5;
+    color: #55627a;
+}
+
+.file-tag {
+    display: inline-block;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    margin: 2px;
+    white-space: nowrap;
 }
 
 .information_div {
@@ -682,26 +1242,71 @@ span:hover {
         box-shadow: 0px 4px 15px rgba(90, 120, 255, 0.2);
     }
 
-    /* Tablas */
-    th {
-        color: var(--text-muted);
+    /* Tablas y Paneles Modo Oscuro */
+    .panel-card,
+    .table-card,
+    .kpi-card,
+    .stat-card,
+    .create-card {
+        background: #1e293b;
+        border: 1px solid #2a3550;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
+    .panel-card h3,
+    .table-card h3,
+    .create-card h3,
+    .page-title,
+    .kpi-val,
+    .stat-value,
+    .info-row strong,
+    label {
+        color: #e6ecff;
+    }
+
+    .info-row {
+        border-bottom-color: #2a3550;
+    }
+
+    .info-row span {
+        color: #cbd5e0;
+    }
+
+    table th,
+    table.master-table th,
+    table.buttons-table th,
+    th {
+        color: #7f8db3;
+        border-bottom-color: #2a3550;
+    }
+
+    table td,
+    table.master-table td,
+    table.buttons-table td,
     td {
         border-bottom: 1px solid #2a3550;
         color: var(--text-main);
     }
 
-    .sidebar-crm {
-        height: 100vh;
+    table tbody tr:hover td,
+    table tr:hover td,
+    table.master-table tr:hover td {
+        background: #111c44;
     }
 
-    .table-card {
-        background: var(--white);
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.08);
-        overflow-x: auto;
+    .filtros input,
+    .filtros select {
+        background: #0f172a;
+        border-color: #2a3550;
+        color: #e0e6ff;
+    }
+
+    .tabs-nav {
+        border-bottom-color: #2a3550;
+    }
+
+    .sidebar-crm {
+        height: 100vh;
     }
 
     /* Badges */
