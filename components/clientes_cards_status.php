@@ -42,6 +42,7 @@
 
         <div>
             <h3>Mis clientes</h3>
+            <i><b class="muted" style="color: var(--text-muted);"><?= $resultado_total['total'] ?> clientes en total</b></i>
         </div>
         <br>
 

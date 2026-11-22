@@ -2,6 +2,10 @@
 require_once __DIR__ . '/../data/conn.php'; 
 require_once __DIR__ . '/../components/security.php';
 
+
+
+
+//EN ESTE PHP SOLO SE BUSCAN LOS RESULTADOS DEL HUD, POR LO QUE PUEDEN PERMANECER AQUÍ, LA LÓGICA DONDE SE EXTRAEN LOS DATOS HA SIDO MOVIDA A MATRIX
 // Filtros de búsqueda
 $gym_filtro = isset($_GET['gym_id']) ? $_GET['gym_id'] : null;
 $member_filtro = isset($_GET['member_id']) ? $_GET['member_id'] : null;
@@ -102,52 +106,36 @@ $denegadosHoy = $totalHoy - $exitosHoy;
                     </thead>
                     <tbody>
                         <?php
-                        $sql = "SELECT a.*, m.nombre_completo, g.nombre_gym 
-                                FROM access_logs a 
-                                LEFT JOIN members m ON a.member_id = m.id 
-                                LEFT JOIN gyms g ON a.gym_id = g.id
-                                WHERE a.gym_id = ?"; // Solo mostramos los de este Gym activo
-                        
-                        $params = [$_SESSION['gym_id']];
 
-                        if($member_filtro) {
-                            $sql .= " AND a.member_id = ?";
-                            $params[] = $member_filtro;
-                        }
-
-                        $sql .= " ORDER BY a.fecha_hora DESC LIMIT 50";
-                        
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute($params);
 
                         while($row = $stmt->fetch()): ?>
-                        <tr>
-                            <td style="font-weight: 700; color: var(--text-muted);">#<?php echo $row['id']; ?></td>
-                            <td>
-                                <div class="member-info">
-                                    <span class="member-name"><?php echo $row['nombre_completo'] ?? 'Desconocido'; ?></span>
-                                    <span class="member-id">ID: <?php echo $row['member_id']; ?></span>
-                                </div>
-                            </td>
-                            <td>
-                                <span style="font-size: 0.85rem; color: var(--text-main); font-weight: 600;">
-                                    <?php echo $row['nombre_gym']; ?>
-                                </span>
-                            </td>
-                            <td>
-                                <?php if($row['acceso_concedido']): ?>
-                                    <span class="status-pill bg-success-light">Concedido</span>
-                                <?php else: ?>
-                                    <span class="status-pill bg-danger-light">Denegado</span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <div style="display: flex; flex-direction: column;">
-                                    <span style="font-weight: 700; font-size: 0.85rem;"><?php echo date('H:i:s', strtotime($row['fecha_hora'])); ?></span>
-                                    <span style="color: var(--text-muted); font-size: 0.75rem;"><?php echo date('d/m/Y', strtotime($row['fecha_hora'])); ?></span>
-                                </div>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--text-muted);">#<?php echo $row['id']; ?></td>
+                                <td>
+                                    <div class="member-info">
+                                        <span class="member-name"><?php echo $row['nombre_completo'] ?? 'Desconocido'; ?></span>
+                                        <span class="member-id">ID: <?php echo $row['member_id']; ?></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span style="font-size: 0.85rem; color: var(--text-main); font-weight: 600;">
+                                        <?php echo $row['nombre_gym']; ?>
+                                    </span>
+                                </td>
+                                <td>
+                                    <?php if($row['acceso_concedido']): ?>
+                                        <span class="status-pill bg-success-light">Concedido</span>
+                                    <?php else: ?>
+                                        <span class="status-pill bg-danger-light">Denegado</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <div style="display: flex; flex-direction: column;">
+                                        <span style="font-weight: 700; font-size: 0.85rem;"><?php echo date('H:i:s', strtotime($row['fecha_hora'])); ?></span>
+                                        <span style="color: var(--text-muted); font-size: 0.75rem;"><?php echo date('d/m/Y', strtotime($row['fecha_hora'])); ?></span>
+                                    </div>
+                                </td>
+                            </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>

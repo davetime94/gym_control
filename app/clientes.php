@@ -39,7 +39,7 @@ if($_SESSION['rol']=='Owner'){
         <div style="display:flex; flex-direction: column;">
 
             <div>
-                <h1>Mis clientes</h1>
+                <h1>Mis clientes</h1> 
             </div>
 
             <div style="display: flex;flex-direction: row; max-width: fit-content; gap: 5px; "> 
