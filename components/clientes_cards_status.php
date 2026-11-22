@@ -1,42 +1,7 @@
 
 
 <link rel="stylesheet" href="../styles/style1.css">
-<?php
 
-//Usuarios activos
-    $stmt=$conn->prepare("SELECT count(*) as total FROM members where gym_id = ? and status_licencia = ?");
-    $stmt->execute([
-        $_SESSION['gym_id'],
-        "Activa"
-    ]);
-
-    $resultado=$stmt->fetch(PDO::FETCH_ASSOC);
-    $usuariosActivos=$resultado['total'];
-
-    //usuarios Vencidos
-    $stmt=$conn->prepare("SELECT count(*) as total FROM members where gym_id = ? and status_licencia = ?");
-    $stmt->execute([
-        $_SESSION['gym_id'],
-        "Vencida"
-    ]);
-
-    $resultado=$stmt->fetch(PDO::FETCH_ASSOC);
-    $usuariosVencidos=$resultado['total'];
-
-    //usuarios Cancelados
-    $stmt=$conn->prepare("SELECT count(*) as total FROM members where gym_id = ?  ");
-    $stmt->execute([
-        $_SESSION['gym_id']
-    ]);
-
-    $resultado=$stmt->fetch(PDO::FETCH_ASSOC);
-    $usuariostotales=$resultado['total']
-    
-    
-
-
-
-?>
 
     <div style="flex-direction: column;" >
 
@@ -56,7 +21,7 @@
 
                 <div>
                     <b><p style="color: green;" >Clientes activos</p></b>
-                    <h2><?php echo $usuariosActivos ?></h2>
+                    <h2><?php echo $resultado_memberStatus['active'] ?></h2>
                 </div>
 
             </div>
@@ -67,7 +32,7 @@
 
                 <div>
                     <b><p style="color: orange;" >Clientes Vencidos</p></b>
-                    <h2><?php echo $usuariosVencidos ?></h2>
+                    <h2><?php $resultado_memberStatus['expired'] ?></h2>
                 </div>
             </div>
             

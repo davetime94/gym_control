@@ -12,6 +12,18 @@ if (isset($_SESSION['gym_id'])) {
     $stmt_total->execute([$_SESSION['gym_id']]);
     $resultado_total = $stmt_total->fetch(PDO::FETCH_ASSOC);
 
+    //CONTEO DE EXPIRACIÓN DE MEMBERS
+    $stmt_memberStatus=$conn->prepare(" SELECT 
+    SUM(status_licencia = 'Activa' ) as active,
+    SUM(status_licencia = 'Vencida') as expired
+    from members where gym_id = ?");
+    $stmt_memberStatus->execute([$_SESSION['gym_id']]);
+    $resultado_memberStatus = $stmt_memberStatus->fetch(PDO::FETCH_ASSOC);
+
+
+
+
+
     //INFORMACIÓN DE LOS GIMNASIOS 
     $stmt_plan = $conn->prepare("SELECT * FROM gyms WHERE id = ?");
     $stmt_plan->execute([$_SESSION['gym_id']]);
