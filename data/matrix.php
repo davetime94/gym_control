@@ -24,11 +24,19 @@ if (isset($_SESSION['gym_id'])) {
 
 
 
-    //INFORMACIÓN DE LOS GIMNASIOS 
+    //INFORMACIÓN DE LOS GIMNASIOS SE COLOCAN DOS
+    //PARA SIMPLISIDAD DE VARIABLES, SE PUEDE USAR CUALQUIERA
+    //ES LA MISMA CONSULTA
+
     $stmt_plan = $conn->prepare("SELECT * FROM gyms WHERE id = ?");
     $stmt_plan->execute([$_SESSION['gym_id']]);
     $resultado_plan = $stmt_plan->fetch(PDO::FETCH_ASSOC) ?: [];
     $resultado_gym = $resultado_plan;  // LA VARIABLE ES $RESULTADO_GYM
+
+    $stmtGym = $conn->prepare("SELECT * FROM gyms WHERE id = ?");
+    $stmtGym->execute([$_SESSION['gym_id']]);
+    $gymData = $stmtGym->fetch(PDO::FETCH_ASSOC);
+
 
     // INFORMACION DE LOS USUARIOS ADMINISTRADORES
     $stmt_user_data = $conn->prepare("SELECT * FROM users_admin WHERE gym_id = ?");

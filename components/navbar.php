@@ -3,24 +3,6 @@
 
 require_once __DIR__ . "/../data/matrix.php";
 
-
-$stmtGym = $conn->prepare("SELECT * FROM gyms WHERE id = ?");
-$stmtGym->execute([$_SESSION['gym_id']]);
-$gymData = $stmtGym->fetch(PDO::FETCH_ASSOC);
-
-
-$stmtuser = $conn->prepare("SELECT * FROM users_admin WHERE gym_id = ?");
-$stmtuser->execute([$_SESSION['gym_id']]);
-$uData = $stmtuser->fetch(PDO::FETCH_ASSOC);
-
-//Sacar cantidad de notificaciones
-$stmt_count = $conn->prepare("SELECT COUNT(*) as total FROM notificaciones WHERE gym_id = ? AND leido = 'no'");
-$stmt_count->execute([$_SESSION['gym_id']]);
-$notif_data = $stmt_count->fetch(PDO::FETCH_ASSOC);
-$total_no_leidas = $notif_data['total'];
-
-
-
 $hoy =  Date('Y-m-d');
 
 
@@ -108,13 +90,13 @@ $hoy =  Date('Y-m-d');
             <span class="label">User Status</span>
             <span class="badge 
             <?= 
-            $uData['status']=='1'?'success':
-           ($uData['status']=='0'?'danger':'')
+            $user_data['status']=='1'?'success':
+           ($user_data['status']=='0'?'danger':'')
             ?>
             
             ">
-                <?php if( $uData['status']=='1'):?> Active 
-                <?php elseif($uData['status']=='0'): ?>Inactivo 
+                <?php if( $user_data['status']=='1'):?> Active 
+                <?php elseif($user_data['status']=='0'): ?>Inactivo 
                 <?php endif; ?>
             </span>
         </div>
@@ -124,13 +106,13 @@ $hoy =  Date('Y-m-d');
             <span class="badge
             
             <?=
-            $uData['approved']=='Aprobado'?'success':
-            ($uData['approved']=='Pendiente'?'warning':
-            ($uData['approved']=='Rechazado'?'danger':''))
+            $user_data['approved']=='Aprobado'?'success':
+            ($user_data['approved']=='Pendiente'?'warning':
+            ($user_data['approved']=='Rechazado'?'danger':''))
             ?>
             
             ">
-                <?php echo $uData['approved'];  ?>
+                <?php echo $user_data['approved'];  ?>
             </span>
         </div>
 
@@ -173,7 +155,7 @@ $hoy =  Date('Y-m-d');
                 </span>
 
                 <span class="agent-role" style="color: white;">
-                    <?php echo $uData['rol'] ?>
+                    <?php echo $user_data['rol'] ?>
                 </span>
                 
           
