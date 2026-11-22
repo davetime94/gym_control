@@ -7,7 +7,7 @@
 
     //EN ESTE PHP SOLO SE BUSCAN LOS RESULTADOS DEL HUD, POR LO QUE PUEDEN PERMANECER AQUÍ, LA LÓGICA DONDE SE EXTRAEN LOS DATOS HA SIDO MOVIDA A MATRIX
     // Filtros de búsqueda
-        $gym_filtro = isset($_GET['gym_id']) ? $_GET['gym_id'] : null;
+    $gym_filtro = isset($_GET['gym_id']) ? $_GET['gym_id'] : null;
     $member_filtro = isset($_GET['member_id']) ? $_GET['member_id'] : null;
 
     // LÓGICA DE ESTADÍSTICAS (Resumen de Hoy)
@@ -22,7 +22,7 @@
 
     $denegadosHoy = $totalHoy - $exitosHoy;
 ?>
-
+<!-- si -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
