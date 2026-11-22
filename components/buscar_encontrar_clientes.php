@@ -1,7 +1,7 @@
 <div>         
 <h3>Buscar clientes</h3>     
 <div class="card" style="width: fit-content;  display: flex; height: fit-content; max-width:fit-content; align-items: center; flex-direction: row; gap:10px;">
-<div><img src="recursos/buscar.png" height="40px" alt=""> </div>
+<div><img src="../recursos/buscar.png" height="40px" alt=""> </div>
 
 <div>
     <form  method="post" style="flex-direction: column;">
@@ -66,7 +66,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 <h3>Información encontrada</h3><br>
 <div class="horizontador" > <!-- Card para poner horizontal -->
     <div>
-        <!--     <img src="recursos/ChatGPT Image Feb 4, 2026, 10_41_11 AM.png" class="perfil_foto" > -->
+        <!--     <img src="../recursos/ChatGPT Image Feb 4, 2026, 10_41_11 AM.png" class="perfil_foto" > -->
     </div>
     <div>
         <h4><?php  echo $nombre_buscado ?></h4>

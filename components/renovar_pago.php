@@ -1,9 +1,11 @@
-<?php include("conn.php");
-include("components/security.php");  ?>
+<?php 
+require_once __DIR__ . '/../data/conn.php';
+require_once __DIR__ . '/../data/security.php';  
+?>
 
 <h2>Renovar pago</h2> <br>
 
-<form method='post'  action='log_renovar_pago.php' style='flex-direction: column; '>
+<form method='post'  action='../funciones/log_renovar_pago.php' style='flex-direction: column; '>
     <div class="card" style="flex-direction: column;">
         <label >Ingresa ID de miebro</label><br>
 

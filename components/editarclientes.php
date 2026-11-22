@@ -129,19 +129,6 @@ input, select{
     font-size:13px;
 }
 
-/* BOTONES */
-.btn{
-    padding:8px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:13px;
-}
-
-.btn-buscar{ background:#3b82f6; color:white; }
-.btn-guardar{ background:#22c55e; color:white; width:100%; margin-top:10px; }
-.btn-eliminar{ background:#ef4444; color:white; width:100%; margin-top:5px; }
-
 /* MENSAJE */
 .msg{
     font-size:13px;

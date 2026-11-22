@@ -25,10 +25,10 @@ $total = $aprobados + $denegados;
 
 
 
-<div class="card">
+<div >
     <!-- APROBADOS -->
-    <div style="display:flex; align-items:center; gap:15px; margin-bottom:10px;">
-        <img src="recursos/icono_addmember.png" height="50px">
+    <div style="display:flex; align-items:center; gap:15px;" class="card">
+        <img src="../recursos/icono_addmember.png" height="50px">
         <div>
             <p style="color:green;">Permitidos</p>
             <h4><?php echo $aprobados; ?></h4>
@@ -36,13 +36,13 @@ $total = $aprobados + $denegados;
     </div>
 
     <!-- DENEGADOS -->
-    <div style="display:flex; align-items:center; gap:15px;">
-        <img src="recursos/usuarios_vencidos.png" height="50px">
+    <div style="display:flex; align-items:center; gap:15px;" class="card">
+        <img src="../recursos/usuarios_vencidos.png" height="50px">
         <div>
             <p style="color:red;">Denegados</p>
             <h4><?php echo $denegados; ?></h4>
         </div>
     </div>
-
+</div>
 
 

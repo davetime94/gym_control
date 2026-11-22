@@ -1,5 +1,6 @@
-  <?php include("matrix.php"); 
-  include("components/security.php");
+  <?php 
+  require_once __DIR__ . "/../data/matrix.php"; 
+  require_once __DIR__ . "/../data/security.php";
   ?>
   
   <div class="card" style="flex-direction: column; gap: 50px;">
@@ -13,7 +14,7 @@
         </div>
 
         <div>
-            <img src="recursos/Editing body text-amico.png" style="height: 500px;  "   alt="">
+            <img src="../recursos/Editing body text-amico.png" style="height: 500px;  "   alt="">
         </div>
 
     <?php elseif($resultado_plan['status']=='Denied'): ?>
@@ -31,7 +32,7 @@
             </div>
 
             <div>
-                <img src="recursos/Forgot password-bro.png" style="height: 500px;  "   alt="">
+                <img src="../recursos/Forgot password-bro.png" style="height: 500px;  "   alt="">
             </div>
         </div>
     <?php endif; ?>

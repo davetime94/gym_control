@@ -1,7 +1,8 @@
 <?php 
 // Contar notificaciones no leídas para el usuario actual
 
-include("components/security.php");
+require_once __DIR__ . "/../data/matrix.php";
+
 
 $stmtGym = $conn->prepare("SELECT * FROM gyms WHERE id = ?");
 $stmtGym->execute([$_SESSION['gym_id']]);
@@ -18,7 +19,6 @@ $stmt_count->execute([$_SESSION['gym_id']]);
 $notif_data = $stmt_count->fetch(PDO::FETCH_ASSOC);
 $total_no_leidas = $notif_data['total'];
 
-include("matrix.php");
 
 
 $hoy =  Date('Y-m-d');
@@ -27,7 +27,7 @@ $hoy =  Date('Y-m-d');
 ?>
 
 
-<link rel="stylesheet" href="style1.css">
+<link rel="stylesheet" href="../styles/style1.css">
 <?php if($_SESSION['rol']=='Owner'): ?>
 
    <!-- SOLO ESTO SE VE SU SOY OWNER  -->
@@ -50,7 +50,6 @@ $hoy =  Date('Y-m-d');
             <div class="agent-text">
                 <span style="color:white;" class="agent-name"><?php echo $_SESSION['nombre']; ?></span>
                 <span class="badge st-blue" style="width: fit-content; color:ghostwhite ;" ><p>Tiempo restante: <?php echo $tiempo_restante ?></p></span>
-
             </div>
             <div class="agent-avatar">
                 <?php echo strtoupper(substr($_SESSION['nombre'], 0, 1)); ?>
@@ -59,7 +58,7 @@ $hoy =  Date('Y-m-d');
 
             
         </div>
-        <a href="logout.php" class="btn-logout-icon" title="Cerrar Sesión">
+        <a href="../funciones/logout.php" class="btn-logout-icon" title="Cerrar Sesión">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
         </a>
     </div>
@@ -185,7 +184,7 @@ $hoy =  Date('Y-m-d');
             </a>
         </div>
 
-        <a href="logout.php" class="logout-btn">
+        <a href="../funciones/logout.php" class="logout-btn">
 
             <svg width="20" height="20" fill="none"
                 stroke="currentColor"
@@ -212,7 +211,7 @@ $hoy =  Date('Y-m-d');
 
 
 <div class="whatsapp auditoria">
-    <a href="auditoria.php" ><p>Actualizar</p></a>
+    <a href="../funciones/auditoria.php" ><p>Actualizar</p></a>
 </div>
 
 
