@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/../components/security.php';
+require_once __DIR__ . '/../data/security.php';
 
 // Verificación obligatoria de rol (Asegurar que eres el dueño o Super Admin del SaaS)
 check_role(['Owner', 'Super Admin']);
 
-require_once __DIR__ . '/../funciones/matrix.php';
+require_once __DIR__ . '/../data/matrix.php';
 
 $mensaje_sistema = "";
 $error_sistema = "";

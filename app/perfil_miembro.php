@@ -1,6 +1,6 @@
 <?php
 // 1. Incluimos la seguridad (esto ya trae la sesión, $gym_id, $user_id y conn.php)
-require_once __DIR__ . "/../components/security.php";
+require_once __DIR__ . "/../data/security.php";
 ?>
 
 <!DOCTYPE html>

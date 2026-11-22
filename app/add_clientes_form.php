@@ -3,8 +3,8 @@
     
 <?php
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/../components/security.php';
-require_once __DIR__ . '/../funciones/matrix.php';
+require_once __DIR__ . '/../data/security.php';
+require_once __DIR__ . '/../data/matrix.php';
 
 $fecha_actual = date('Y-m-d');
 $fecha_30_dias = date('Y-m-d', strtotime($fecha_actual . ' + 30 days'));

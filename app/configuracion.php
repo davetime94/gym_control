@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/../components/security.php';
-require_once __DIR__ . '/../funciones/matrix.php';
+require_once __DIR__ . '/../data/security.php';
+require_once __DIR__ . '/../data/matrix.php';
 
 require_once __DIR__ . '/../PHPMailer-master/src/Exception.php';
 require_once __DIR__ . '/../PHPMailer-master/src/PHPMailer.php';

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/../components/security.php';
-require_once __DIR__ . '/../funciones/matrix.php';
+require_once __DIR__ . '/../data/security.php';
+require_once __DIR__ . '/../data/matrix.php';
 
 // Validar que la sesión contenga gym_id
 if (!isset($_SESSION['user_id']) || empty($_SESSION['gym_id'])) {

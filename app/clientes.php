@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/../components/security.php';
 
 if($_SESSION['rol']=='Owner'){
     header("location: manager.php");

@@ -1,8 +1,7 @@
 <?php 
 // Contar notificaciones no leídas para el usuario actual
 
-require_once __DIR__ . "/security.php";
-require_once __DIR__ . "/../funciones/matrix.php";
+require_once __DIR__ . "/../data/matrix.php";
 
 
 $stmtGym = $conn->prepare("SELECT * FROM gyms WHERE id = ?");

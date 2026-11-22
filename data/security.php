@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../data/conn.php";
+require_once __DIR__ . "/conn.php";
 
 $limite_tiempo = 28800; 
 $tiempo_transcurrido = 0;

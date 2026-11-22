@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/../components/security.php';
-require_once __DIR__ . '/../funciones/matrix.php'; // Aquí ya viene el $_SESSION['gym_id'] y asume que $conn es PDO
+require_once __DIR__ . '/../data/security.php';
+require_once __DIR__ . '/../data/matrix.php'; // Aquí ya viene el $_SESSION['gym_id'] y asume que $conn es PDO
 
 $hoy =  date('Y-m-d');
 

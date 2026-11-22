@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/../components/security.php';
+require_once __DIR__ . '/../data/security.php';
 
 // Métricas de auditoría en vivo para los widgets superiores
 $stmtTotal = $conn->prepare("SELECT COUNT(*) as total FROM logs WHERE gym_id = ?");

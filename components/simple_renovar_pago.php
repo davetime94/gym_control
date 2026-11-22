@@ -1,6 +1,6 @@
 <?php 
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/security.php';
+require_once __DIR__ . '/../data/security.php';
 ?>
 
 <h2>Renovar pago</h2> <br>

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/../components/security.php';
+require_once __DIR__ . '/../data/security.php';
 
 // Validar que exista un gimnasio en sesión
 $gym_id = $_SESSION['gym_id'] ?? 0;

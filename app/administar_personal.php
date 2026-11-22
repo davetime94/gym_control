@@ -2,8 +2,7 @@
     require_once __DIR__ . '/../data/conn.php';
     require_once __DIR__ . '/../data/matrix.php';
 
-    require_once __DIR__ . '/../components/security.php';
-    require_once __DIR__ . '/../funciones/matrix.php';
+    require_once __DIR__ . '/../data/security.php';
     $mensaje = "";
 
     // --- LÓGICA DE PROCESAMIENTO (Mantenida intacta) ---
@@ -61,6 +60,8 @@
         $log->execute([$_SESSION['nombre'], "Editó usuario ID: $id", $_SESSION['user_id'], $_SESSION['gym_id'], "USER_UPDATE"]);
         $mensaje = "✏️ Usuario actualizado";
     }
+
+
 ?>
 
 <!DOCTYPE html>

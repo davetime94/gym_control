@@ -1,26 +1,26 @@
 <?php 
-require_once __DIR__ . '/../data/conn.php'; 
-require_once __DIR__ . '/../components/security.php';
+    require_once __DIR__ . '/../data/conn.php'; 
+    require_once __DIR__ . '/../data/security.php';
 
 
 
 
-//EN ESTE PHP SOLO SE BUSCAN LOS RESULTADOS DEL HUD, POR LO QUE PUEDEN PERMANECER AQUÍ, LA LÓGICA DONDE SE EXTRAEN LOS DATOS HA SIDO MOVIDA A MATRIX
-// Filtros de búsqueda
-$gym_filtro = isset($_GET['gym_id']) ? $_GET['gym_id'] : null;
-$member_filtro = isset($_GET['member_id']) ? $_GET['member_id'] : null;
+    //EN ESTE PHP SOLO SE BUSCAN LOS RESULTADOS DEL HUD, POR LO QUE PUEDEN PERMANECER AQUÍ, LA LÓGICA DONDE SE EXTRAEN LOS DATOS HA SIDO MOVIDA A MATRIX
+    // Filtros de búsqueda
+        $gym_filtro = isset($_GET['gym_id']) ? $_GET['gym_id'] : null;
+    $member_filtro = isset($_GET['member_id']) ? $_GET['member_id'] : null;
 
-// LÓGICA DE ESTADÍSTICAS (Resumen de Hoy)
-$hoy = date('Y-m-d');
-$stmtTotal = $conn->prepare("SELECT COUNT(*) as total FROM access_logs WHERE DATE(fecha_hora) = ? AND gym_id = ?");
-$stmtTotal->execute([$hoy, $_SESSION['gym_id']]);
-$totalHoy = $stmtTotal->fetchColumn();
+    // LÓGICA DE ESTADÍSTICAS (Resumen de Hoy)
+    $hoy = date('Y-m-d');
+    $stmtTotal = $conn->prepare("SELECT COUNT(*) as total FROM access_logs WHERE DATE(fecha_hora) = ? AND gym_id = ?");
+    $stmtTotal->execute([$hoy, $_SESSION['gym_id']]);
+    $totalHoy = $stmtTotal->fetchColumn();
 
-$stmtExitos = $conn->prepare("SELECT COUNT(*) FROM access_logs WHERE DATE(fecha_hora) = ? AND acceso_concedido = 1 AND gym_id = ?");
-$stmtExitos->execute([$hoy, $_SESSION['gym_id']]);
-$exitosHoy = $stmtExitos->fetchColumn();
+    $stmtExitos = $conn->prepare("SELECT COUNT(*) FROM access_logs WHERE DATE(fecha_hora) = ? AND acceso_concedido = 1 AND gym_id = ?");
+    $stmtExitos->execute([$hoy, $_SESSION['gym_id']]);
+    $exitosHoy = $stmtExitos->fetchColumn();
 
-$denegadosHoy = $totalHoy - $exitosHoy;
+    $denegadosHoy = $totalHoy - $exitosHoy;
 ?>
 
 <!DOCTYPE html>

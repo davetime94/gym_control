@@ -1,8 +1,8 @@
 
 <?php
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/../components/security.php';
-require_once __DIR__ . '/../funciones/matrix.php';
+require_once __DIR__ . '/../data/security.php';
+require_once __DIR__ . '/../data/matrix.php';
 
 /**LOGICA PARA CAMBIAR EL ESTATUS*/
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

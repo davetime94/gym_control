@@ -2,7 +2,7 @@
 <?php
 
 require_once __DIR__ . '/../data/conn.php';
-require_once __DIR__ . '/../components/security.php';
+require_once __DIR__ . '/../data/security.php';
 
 
 

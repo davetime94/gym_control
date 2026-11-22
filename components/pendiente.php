@@ -1,6 +1,6 @@
   <?php 
-  require_once __DIR__ . "/../funciones/matrix.php"; 
-  require_once __DIR__ . "/security.php";
+  require_once __DIR__ . "/../data/matrix.php"; 
+  require_once __DIR__ . "/../data/security.php";
   ?>
   
   <div class="card" style="flex-direction: column; gap: 50px;">
